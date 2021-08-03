@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=yes"> -->
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no, viewport-fit=cover" />
+<script src="js/jquery.min.js" charset="utf-8"></script>
+<style type="text/css">
+html,body{ height: 100%; margin: 0px; padding: 0px; }
+body {  align-items: center;  height: 100vh;overflow: hidden;}*, *::before, *::after {  box-sizing: border-box;} /*去掉 display: flex;  justify-content: center;  */
+a, a:hover, a:active, a:visited, a:link, a:focus {-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		-webkit-tap-highlight-color: transparent;
+		outline: none;
+		background: none;
+		text-decoration: none;
+	}/*  //去除A标签点击默认背景 */
+
+.gGame{height: 100%; width: 100%; background-image: url(img/bg_3.jpg); background-repeat: no-repeat; background-position: center center; background-size: cover; position: relative;overflow: hidden;  background-attachment: fixed;} 
+/*头部*/
+.gGame_top{  height: 70px; width: 100%; position: fixed; z-index: 9999; left: 0px; top: 0px; background-color: rgba(255,255,255,.5); }
+.gGame_top .tx img { height: 36px; border-radius: 50%; float: right; margin-top: 14px; margin-right: 10px; border: 3px solid #FFF; margin-left: 10px;}
+.gGame_top .tx b { line-height: 70px; float: right; color: #FFD800; text-shadow: 1px 1px 1px #FBAB16; }/* FCAF2F */
+.gGame_top .datetime { display: block;  text-decoration: none;  float: left; margin-top: 20px; margin-left: 10px; }
+.gGame_top .datetime i{ line-height: 16px; font-size: 12px; display: block; font-style: normal; color: #FCAF2F; text-shadow: 1px 1px 1px #000; font-weight: bold; }
+
+/*工具栏*/
+.gGame_tool {text-align: center; position: fixed; z-index: 2; width: 100%; left: 0px; bottom: 80px; margin: 0px; padding: 0px; list-style-type: none;}
+.gGame_tool .ts{color: #FFD800; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 1px #FBAB16;}
+.gGame_tool ul{padding: 0px; list-style-type: none; margin-top: 0px; margin-right: 20px; margin-bottom: 0px; margin-left: 20px; }
+.gGame_tool ul li{width: 25%; float: left; margin: 0px; padding: 0px; list-style-position: inside; list-style-type: none; display: block; }
+.gGame_tool ul li a {display: inline-block; text-align: center; text-decoration: none;  text-shadow: 1px 1px 1px #000;}
+.gGame_tool  ul li a img { width: 4rem; height:4rem; display: block; border-radius: 50%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; margin-right: auto; margin-left: auto; }
+.gGame_tool a.on img{transform: scale(1.2);  -ms-transform: scale(1.2); 	/* IE 9 */ -moz-transform: scale(1.2); 	/* Firefox */ -webkit-transform: scale(1.2); /* Safari 和 Chrome */ -o-transform: scale(1.2); 	/* Opera */}
+.gGame_tool ul li a b {font-size: 0.8rem; color: #FCAE41; text-align: center; display: block; line-height: 24px;text-shadow: 1px 1px 1px #000;}
+.gGame_tool ul li a.on b {color: #F9303B;  transform: scale(1.2);}
+
+/*底部*/
+.gGame_footer {height: 70px; width: 100%; position: fixed; z-index: 2; left: 0px; bottom: 0px; background-color: rgba(255,255,255,.5);} 
+.gGame_footer .tx img {height: 36px; border-radius: 50%; float: left; border: 3px solid #FFF; margin-top: 17px; margin-left: 10px; margin-right: 10px; }
+.gGame_footer .tx b {line-height: 70px; float: left; color: #FFD800; text-shadow: 1px 1px 1px #FBAB16; }/* FBAB16 */
+.gGame_footer .but1 {background-image: url(img/jilu-btn.png); background-repeat: no-repeat; background-size: contain; border-radius: 5px; float: right; margin-right: 0.5rem; display: block; text-align: center; color: #fff; text-decoration: none; font-size: 1rem; font-weight: bold; line-height: 30px; margin-top: 20px; width: 95px; letter-spacing: 0.1rem;} 
+.gGame_footer .but1:hover { border-width: 1px; }
+/*中部*/
+.gGame_con { text-align: center; color: #FFD800; padding-top: 80px; z-index: 1; position: absolute; width: 100%; }/* FCAF2F */
+.gGame_con h1 { font-size: 1.5rem; text-shadow: 1px 1px 1px #F90; color: #FFD800; margin-bottom: 10px; display:none; } /*  margin-top: 120px; */
+.gGame_con h2{ font-size: 1.5rem; margin: 5px; padding-top: 15px; text-shadow: 1px 1px 1px #FBAB16; display:none;}
+.gGame_con h3{ font-size: 14px; margin: 5px; text-shadow: 1px 1px 1px #FBAB16;display:none;}
+.gGame_con h3 i { font-size: 18px;color: #F00; font-style: normal; margin-right: 3px; margin-left: 3px; display:inline-block;}
+.gGame .gGame_con h4 { color: #FFD800; font-size: 16px; text-shadow: 1px 1px 1px #ccc;display:none;}
+
+
+/* 后加 动画样式 start */
+.gGame_con h2{ animation:  title-beat 2s  ease-in-out; -webkit-animation:  title-beat 2s  ease-in-out;}
+@-webkit-keyframes title-beat{
+	2%,
+    24%,
+    80% {-webkit-transform: translate(0, 1rem) rotate(1.5deg); transform: translate(0, 1rem) rotate(1.5deg) } 
+    4%,
+    68%,
+    98% {-webkit-transform: translate(0, -1rem) rotate(-.5deg); transform: translate(0, -1rem) rotate(-.5deg) }
+    0%,
+    100% {-webkit-transform: translate(0, 0) rotate(0); transform: translate(0, 0) rotate(0) } 
+}
+
+.gGame_con h3 i {-webkit-animation: Tada 3s  both infinite; -moz-animation: Tada 3s  both infinite; 
+				-ms-animation: Tada 3s  both infinite; animation: Tada 3s  both infinite;}
+@-webkit-keyframes Tada {
+    0% {
+        -webkit-transform: scale(1);
+        -webkit-transform: scale(1)
+    }
+    70%,73%{
+        -webkit-transform: scale(0.9) rotate(-3deg);
+        -webkit-transform: scale(0.9) rotate(-3deg)
+    }
+    77%,83%,90%,97%  {
+        -webkit-transform: scale(1.1) rotate(3deg);
+        -webkit-transform: scale(1.1) rotate(3deg)
+    }
+
+    80%,87%,93%{
+       -webkit-transform: scale(1.1) rotate(-3deg);
+        -webkit-transform: scale(1.1) rotate(-3deg)
+    }
+
+    100% {
+        -webkit-transform: scale(1) rotate(0);
+        -webkit-transform: scale(1) rotate(0)
+    }
+}
+@keyframes Tada {
+    0% {
+        -webkit-transform: scale(1);
+        -webkit-transform: scale(1)
+    }
+
+    70%,73%{
+        -webkit-transform: scale(0.9) rotate(-3deg);
+        -webkit-transform: scale(0.9) rotate(-3deg)
+    }
+
+    77%,83%,90%,97%  {
+        -webkit-transform: scale(1.1) rotate(3deg);
+        -webkit-transform: scale(1.1) rotate(3deg)
+    }
+
+    80%,87%,93%{
+        -webkit-transform: scale(1.1) rotate(-3deg);
+        -webkit-transform: scale(1.1) rotate(-3deg)
+    }
+
+    100% {
+        -webkit-transform: scale(1) rotate(0);
+        -webkit-transform: scale(1) rotate(0)
+    }
+}
+
+.gGame_con  span{letter-spacing: 0.3rem;text-shadow: 1px 1px 1px #FBAB16; text-align: center; } 
+.beat-char{position: relative; display: inline-block; }
+
+/* 后加 动画样式 end */
+.gGame_top .back { float: left; margin-top: 15px; margin-left: 10px; }
+.gGame_top .back img{ height: 30px; }
+.gGame .tchu { position: absolute; width: 100%; text-align: center; top: 45%; z-index: 0; margin-top: -240px; -webkit-animation: tchu 1s;  display: none;  }
+.gGame .wchu { position: absolute; width: 100%; text-align: center; bottom: 40%; z-index: 0; margin-bottom: -200px; -webkit-animation: wchu 1s;  display: none;}
+.gGame .wchu img,.gGame .tchu img{ width: 200px; }
+.win_or_lose{position: absolute; top: 50%; left: 50%; margin-top: -9.2rem; margin-left: -9.3rem;z-index:10;display:none;}
+/* 中部 显示双方出招面板 */
+.gGame .gGame-leitai {position: fixed;width: 100%;height: 15rem; z-index: 20;bottom:10rem}
+.djs_btn{background-image: url(img/djs-clock.png); background-size: contain; background-repeat: no-repeat; text-align: center; color: #FCAF2F; font-weight: bold; line-height: 4rem; font-size: 1.5rem; /* position: absolute; */ background-position: center; margin-top: 15rem; text-align: center;display:none;}
+@keyframes tchu {from { top: 0%; }to { top: 45%;}}
+@keyframes wchu {from { bottom: 0%; }to { bottom: 40%;}}
+
+
+/* 战绩详情 css start */
+.record-box{width: 100%; background: #fff9e3;  border-top-left-radius:10px ;border-top-right-radius:10px ; margin: 0 auto; position: absolute; z-index: 30;  bottom: 0px; display: none;overflow: hidden; } 
+.record-box .cancel-btn{position: absolute; right:0rem ; top:0.6rem; width: 40px ; height: 40px ;  }
+.record-box .cancel-btn img{width: 1.5rem ; height: 1.5rem; }
+.content-box{/*  height: 20rem; */ min-height: 10rem; height: 20rem;overflow-x: hidden; } 
+.record-container h1{color: #83685d ; text-align: center; font-size: 1.2rem ; padding:10px 0 ; margin: 0px ; box-shadow: 0 0 15px #8e5e5a; border-radius: 10px ; } 
+.record-container  .content-list{border-bottom: 1px solid  #fff ; margin: 1rem 2rem ; font-size: 2rem; height: 2.5rem; line-height: 1.8rem; }
+.record-container  .content-list span{float: left;margin-right: 1.1rem;color: #ab9b8c;font-size: 0.8rem}
+.record-container  .content-list span:nth-child(2){width:25%}
+.record-container  .content-list img{width: 1.6rem;height: 1.6rem;}
+.record-container .icon-flag{width: 40px;height: 40px; background-size: 100%} 
+.record-container .detail-info p {padding: 0px;margin: 0px;color:#ab9b8c;font-size: 25px; line-height: 45px} 
+.l{float: left; } .r{float: right; } 
+.fgx-div{width: 100%;height: 2px;background: #ffffff} 
+.end-list{text-align: center;font-size: 0.8rem ;color: #ab9b8c} 
+/* 清除浮动样式4 *//* 使用双伪元素清除浮动 */ 
+.clearfix:before,.clearfix:after {content: ""; display: block; clear: both; } 
+.clearfix {zoom: 1; } /* 遮罩层样式 */ 
+.cover{ display:none;  width:100%; height:100%; position:absolute; top:0; left:0; z-index:1; background-color:#000; opacity:0.3; /* display:none; */ } 
+.record-box{animation: animate 3s ease 1; -webkit-animation:animate 3s 1; /* Safari 和 Chrome */ }
+@keyframes animate{from {bottom:-100%;} to {bottom: 0 } } 
+@media screen and (max-width:374px){html {font-size: 14px ; } }
+/* 加载中样式 */
+.loading{ display:none;}
+.loading img{position: absolute; z-index: 9999; width: 3rem; height: 3rem; top: 50%; margin-top: -1.5rem; right: 50%; margin-right: -1.5rem;animation:1s rotate  ease-in-out infinite ;
+-webkit-animation:1s rotate  ease-in-out infinite ;}
+@keyframes rotate{
+     from{transform: rotate(0deg); } to{transform: rotate(360deg); } }
+@-webkit-keyframes rotate{
+     from{-webkit-transform: rotate(0deg); } to{-webkit-transform: rotate(360deg); } }
+</style>
+
+</head>
+<body>
+<div  class="gGame" >
+<div class="gGame_top">
+  <!--  <a href="javascript:history.go(-1);" class="back"><img src="img/fh.png"></a> -->
+    <div class="tx"><img src="" id="tico"><b id="tname">对手昵称</b></div>
+ </div>
+	
+	<!-- <div class="gGame-leitai"> -->
+	<div class="tchu"><img src="img/t剪刀.png"></div>
+	<div class="win_or_lose"><!-- <img src="img/result-win.png"> --></div><!--成功 失败 平-->
+	<div class="wchu"><img src="img/w布.png"></div>
+ 	<!-- </div> -->
+    
+  <div class="gGame_con">
+  	<h2 id="g_title"><!-- 现金钢一下千人组10元区 --></h2> 
+    <h3 id="g_person">参与人数<i id="zrs"></i>人 <!-- 预计<i id="zls"></i>轮 --> 当前第<i id="xls"></i>轮</h3> 
+    <h4 id="kssj"><!-- 开赛时间 --></h4>
+    <h1 id="ks"><!--提醒与倒计时--></h1>
+  </div>
+  <div id="djs" class="djs_btn"><span></span></div><!--倒计时计时器-->
+
+	<div class="gGame_tool" id="gGame_tool">
+	   <p id="ts" class="ts">默认随机出招等待比赛开始</p>
+	   <ul>
+	    <li><a href="javascript:;" data-chu="0" class="on" id="suiji"><img src="img/suiji.gif"><b>随机</b></a></li>
+	   	 <li><a href="javascript:;" data-chu="1"><img src="img/jiandao.png"><b>剪刀</b></a></li>
+	    <li><a href="javascript:;" data-chu="2"><img src="img/shitou.png"><b>石头</b></a></li>
+	    <li><a href="javascript:;" data-chu="3"><img src="img/bu.png"><b>布</b></a></li>
+	   </ul>
+	</div>
+  
+	<div class="gGame_footer">
+	  	<div class="tx"><img src="" id="mico"><b id="mname">我的昵称</b></div>
+	   <!--  <a href="#" class="but1" id="jilu" >游戏记录</a> -->
+	  </div>
+	</div>
+
+<!-- 战绩详情 -->
+<section>
+	<div class="record-box">
+		<div class="record-container  clearfix">
+			<h1 class="clearfix">我的战绩</h1>
+			<div class="cancel-btn"><img src="img/cancel-btn-gray.png"></div>
+			<!-- <div class="fgx-div"></div> -->
+			<div class="content-box">
+				<div class="content-box-list">
+					<!--  <div class="content-list clearfix">
+											<span><img src="img/lose.png"></span>
+											<span>石vs布</span>
+											<span>2020-05-16 13：00</span>
+										</div>
+										
+										<div class="content-list clearfix">
+											<span><img src="img/fair.png"></span>
+											<span>石vs布</span>
+											<span>2020-05-16 13：00</span>
+										</div>
+										
+										<div class="content-list clearfix">
+											<span><img src="img/win.png"></span>
+											<span>石vs布</span>
+											<span>2020-05-16 13：00</span>
+										</div>
+										
+										<div class="content-list clearfix">
+											<span><img src="img/win.png"></span>
+											<span>石vs布</span>
+											<span>2020-05-16 13：00</span>
+										</div> -->
+				</div>
+				<p class="end-list clearfix">--全部数据--</p>
+			</div>
+		</div>
+	</div>
+	<!-- 遮罩层 -->
+	<div class="cover"></div>
+	<!-- <button onclick="show()" id="showBtn">显示</button> -->
+</section>
+
+<!-- 加载中... -->
+ <div class="loading"><img src="img/loading.png"></div>
+
+<script type="text/javascript" src="js/easying.js"  charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.beattext.js"  charset="utf-8"></script>
+<script>
+ ktime='';//开赛时间		 2021/5/18 09:29:40
+// jsai = 0 ;//是否有加赛 默认0
+ //jsaiCount = 0 ; //加赛次数
+ is_ok = 0; //论数 默认0
+ id = "" ;
+//计时器			
+$(function () {
+		
+			isFirstInto = true ; //标志页面第一次加载
+			isLunFlag = false ;
+			//声明变量
+			var $gTitle  = $("#g_title"),//现金刚一下活动
+			    $gPerson = $("#g_person"),//参赛人数 轮数
+			    $kssj    = $("#kssj") , //开赛时间 
+			    $ks      = $("#ks"), //等待游戏开始...游戏结束...加赛中，尽快出招
+			    $djs     = $("#djs"), //倒计时
+			    $gGameTool = $("#gGame_tool") ; //操作面板
+
+				var list    = []; //定时器数组
+				var count  ;
+			    //获取界面显示信息
+			    id = getGameId() ;
+				getGameInfo(id) ;
+
+				//获取上个界面传过来的游戏ID
+				function getGameId(){
+					 //获取上个界面传来的id
+				    var loc = location.href;
+					var n1 = loc.length;
+					var n2 = loc.indexOf('=');
+					id = loc.substr(n2+1,n1-n2); //游戏id
+					return id ;
+				}
+
+				//后台请求获取界面信息数据
+				function getGameInfo(id){
+					 $(".loading").show() ;
+					 var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.game_info";
+				      $.ajax({
+				        type: "get",
+				        url: url,
+				        xhrFields: { withCredentials: true },
+				        crossDomain: true, 
+				        data:  {id:id},//传入游戏ID {i:2,c:"entry",m:"ewei_shopv2",do:"mobile",r:"api.game_list"},
+				        dataType: "JSON",
+				        success: function (data ,textStatus, jqXHR)
+				        {
+				          if(data.code==0){
+				        	 gGameInfoShow(data.data) ;//界面赋值
+				        	 console.log('data.data.game_info.start_time：'+data.data.game_info.start_time) ;
+							 //开始游戏
+							 var starTime = data.data.game_info.start_time ;
+							 count  =  getIntervalHour(new Date(),new Date(starTime)) ;
+							 startGgame(count) ;
+				          } else{
+				              alert(data.msg) ;
+				          }
+				          $(".loading").hide() ;
+				        },
+				        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+				           //window.location.href = "404.html" ;
+				        }
+				      });
+				}
+
+
+		    //开始游戏定时器
+		    function startGgame (count) {
+		    	console.log('count:'+count) ;
+		        var hander = setTimeout(_ => {
+		            gGameInfo(count);
+		        }, 1000);
+		      //  list.push(hander);
+		    }
+		   
+		    //清除定时器
+		    function learTimeoutList (list) {
+		        Array.isArray(list) && list.forEach(v => clearTimeout(v));
+		    }
+
+			function gGameInfo(sc){
+				
+				//大于15秒显示比赛时间
+				if (sc>15){
+					$("#g_title").show() ;
+					$("#g_person").show() ;
+					$("#kssj").show() ;
+					//$("#kssj").text(ktime);//显示开赛时间
+					$("#ks").show() ;
+					//等待开始加动画
+					if (add() == 1) {
+						$("#ks").html("等待开始...") ;
+						/*addAnimation() ;*/
+						$('h1#ks').beatText({isAuth:true,beatHeight:"1em",isRotate:false,upTime:200,downTime:200});
+					}
+
+					//$(".djs_btn").hide() ;//倒计时隐藏
+					$(".gGame_tool").show();	
+				}
+
+				//小于等于15秒倒计时
+				if (sc<=15) {
+					$("#ks").hide();
+					$(".djs_btn").show() ;//倒计时显示
+					$(".djs_btn span").html(sc) ; //倒计时显示秒数
+					$(".gGame_tool").show();
+				}
+				
+				//剩余5秒内显示倒计时
+				if(sc<=5 && sc>0){
+					$(".gGame_tool").hide();
+					//向后台发送请求获取比赛结果
+					if (sc==4) { //倒计时4s向后台请求 判断输赢
+						var paramJson = {id:id} ; //游戏id 招数  剪刀 石头 布1-3
+						//获取输赢结果
+						getResultData(paramJson) ;
+
+					}
+				}
+
+				//如何第一次进入，sc<0.游戏结束，否则是通过加时或者自动进入下一轮开赛
+				if (sc<0 && isFirstInto ) {
+					    $(".gGame_con").show() ;
+						$("#g_title").show();
+						$("#g_person").hide() ;
+						$(".djs_btn").hide() ;//倒计时显示
+						$("#kssj").show() ;
+						$("#kssj").text("比赛结束");//显示开赛时间
+						return ;
+				}
+				
+				 //时间到获取比赛结果比赛结果停留3秒
+				if(sc<=0 && sc>=-3){
+						isFirstInto = false ; //是否是第一次进入标志
+
+						 tchu = changChuStr(sheHand) ; //sheHand=="1"?"剪刀":(sheHand=="2"?"石头":"布") ;//'布'; //他出的
+						 wchu = changChuStr(meHand) ;//meHand=="1"?"剪刀":(meHand=="2"?"石头":"布") ;//'剪刀'; //我出的
+						$(".djs_btn").hide() ;//倒计时隐藏
+						$(".tchu").show();//显示出招动画
+						$(".wchu").show();//显示出招动画
+						$(".tchu").html('<img src="img/t'+tchu+'.png">')//根据返回值调取相关图片 他出的
+						$(".wchu").html('<img src="img/w'+wchu+'.png">')//根据返回值调取相关图片 我出的
+						$(".win_or_lose").show() ;
+						$(".gGame_con").hide() ;
+						$(".gGame_tool").hide(); //出招面板隐藏
+						//显示结果
+						if (isWin=="1") {
+					    		$(".win_or_lose").html('<img src="img/result-win.png">');
+					    }else {
+					    	if (isPing == "1") {
+					    		$(".win_or_lose").html('<img src="img/result-ping.png">');
+					    	}else {
+					    		$(".win_or_lose").html('<img src="img/result-lose.png">');
+					    		if (sc==-3) {
+					    			$(".tchu").hide();
+									$(".wchu").hide();
+									$(".djs_btn").hide() ;
+									$(".win_or_lose").hide() ;
+									$(".gGame_con").show() ;
+									$("#g_title").show() ;
+									$("#g_person").show() ;
+									$("#kssj").show() ;
+									$("#kssj").text("游戏结束");//显示开赛时间
+									return ;
+					    		}
+					    		
+					    	}
+					    }
+
+				}
+			   
+			 
+				if(sc <= -4){ 
+					//learTimeoutList(list);//清除定时器
+		          	//list = null; // 释放
+
+		          	$(".tchu").hide();
+					$(".wchu").hide();
+					$(".djs_btn").hide() ;
+					$(".win_or_lose").hide() ;
+				
+					if(is_ok == 0 ) {
+						$(".gGame_con").show() ;
+						$("#g_title").show();
+						$("#g_person").show() ;
+						$("#kssj").show() ;
+						$("#kssj").text("等待所有人比赛结束后自动进入下一轮");
+						setTimeout(function(){
+							circular() ; //循环调用
+						},4000) ; //5秒后调用
+					}else{
+						$(".gGame_con").show() ;
+						$("#g_title").show();
+						$("#g_person").show() ;
+						$("#kssj").show() ;
+						$("#kssj").text("比赛结束");
+					}
+
+	         
+				  return ;
+				}
+
+				count = --count ;  
+			    startGgame(count); 
+
+			}
+
+			//计数器
+			var add = (function () {
+		    		var counter = 0;
+		    		return function () {return counter += 1;}
+			})();
+ 
+
+			//给等待开始加动画
+			function addAnimation(){
+					 $("#ks").html('等待开始....');
+					 var word = document.getElementById('ks')
+					 var letters = word.textContent.split("");
+					 word.textContent = "" ;
+					    letters.forEach(function (letter,i) {
+					        var span = document.createElement("span");
+					        span.textContent = letter;
+					        setTimeout(function () {
+				          		  span.className = "run";
+				        	}, i * 250);
+					        word.append(span);
+					    });
+			}
+
+			//进入下一轮 论循方法
+			function circular(){ 
+				isLunFlag = true ;
+				var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.game_info";
+		        var setTime = setInterval(function longPolling() {
+		            $.ajax({
+		                type: "get",
+				        url: url,
+				        xhrFields: { withCredentials: true },
+				        crossDomain: true, 
+				        data:  {id:id},//传入游戏ID {i:2,c:"entry",m:"ewei_shopv2",do:"mobile",r:"api.game_list"},
+				        dataType: "JSON",
+		                success: function (data, textStatus) {
+		                	/*if(data.is_ok == 1){
+		                		$(".gGame_con").show() ;
+								$("#g_title").show();
+								$("#g_person").show() ;
+								$("#kssj").show() ;
+								$("#kssj").text("比赛结束");
+								return ;
+		                	}*/
+		                    if (ktime != data.data.game_info.start_time ) {
+		                        getGameInfo(id) ;
+		                        clearTimeout(setTime) ;
+		                        return ;
+		                    }
+		                },
+		                error: function (XMLHttpRequest, textStatus, errorThrown) {
+		                },
+		            });
+
+		        },1000) ;
+
+		}
+				
+});
+
+//展示界面信息
+function gGameInfoShow(data){
+
+	 $('#tname').text(data.she.nickname == undefined ? "暂无" : data.she.nickname); //对手姓名
+	 $('#tico').attr('src',data.she.avatar_wechat == undefined ? "img/user.png" : data.she.avatar_wechat); //对手头像
+	 $('#mname').text(data.me.nickname); //姓名
+	 $('#mico').attr('src',data.me.avatar_wechat); //头像
+	 
+	 $('#g_title').text(data.game_info.game_name); //活动名称
+	 $('#zrs').text(data.sum == null ? '0' : data.sum); //参与总人数
+	 /*$('#zls').text('7'); *///预计总轮数
+	 $('#xls').text(data.lun); //当前轮数
+	 $('#kssj').text(data.game_info.start_time) ;//活动开始时间
+	 lun = data.lun ;
+	 ktime = data.game_info.start_time ;
+	
+}	  	   
+
+//获取时差
+function getIntervalHour(startDate, endDate) {
+	var ms = endDate.getTime() - startDate.getTime();
+	//if (ms < 0) return 0;
+	return Math.floor(ms/1000);
+}
+
+// 元素状态元素 文字信息 是否显示
+function getElementState(objArr){
+		/*	var $gTitle= $("#g_title"),//现金刚一下活动
+			    $gPerson = $("#g_person"),//参赛人数 轮数
+			    $kssj = $("#kssj") , //开赛时间 
+			    $ks = $("#ks"), //等待游戏开始...游戏结束...加赛中，尽快出招
+			    $djs = $("#djs"), //倒计时
+			    $gGameTool = $("#gGame_tool") ; //操作面板*/
+	$.each(objArr,function(index,ele){
+		var obj = objArr[index] ;
+		var $ele = obj.$ele ,
+		    text = obj.text ,
+		    showY= obj.showY ;
+		if (showY) {
+			$ele.show() ;
+			$ele.text(text) ;
+		}else{
+			$ele.hide() ;
+		}
+	}) ;
+}
+
+
+
+//出招操作	
+ $('.gGame_tool a').on('click', function (event) {
+	//移除添加选中效果
+	$('.gGame_tool a').removeClass('on');
+	$(this).addClass('on');
+	var paramJson = {id:id,hand:""} ;
+	//得到出招内容data-chu
+	var chu = $(this).data("chu") ; //得到出招内容手势
+	if (!chu) { //随机 0
+		chu = parseInt(3*Math.random())+1 ;
+	}
+	paramJson = {id:id,hand:chu} ;
+	//请求出拳接口
+	getCqData(paramJson) ;
+
+ });
+
+
+ //请求出拳
+ function getCqData(paramJson){
+ 	var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.chuzhao";
+		      $.ajax({
+			        type: "POST",
+			        url: url,
+			        xhrFields: { withCredentials: true },
+			        crossDomain: true, 
+			        data:  paramJson,//传入游戏ID 
+			        dataType: "JSON",
+			        success: function (data ,textStatus, jqXHR)
+			        {
+			          if(data.code==0){
+			         	 $("#ts").html("您已选 "+changChuStr(data.data.me_hand)+" 等待比赛开始！");	
+			          } else{
+			             alert(data.msg);
+			          }
+			        },
+			        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+			            alert("请求失败！");
+			        }
+		      });
+ }
+
+ //获取结果数据
+ /*{code: 0, msg: "请求成功", data: {me_hand: "1", she_hand: "2", is_win: 0, is_ping: 0}}*/
+  var meHand = "" ;  //全局变量
+  var sheHand = "" ;
+  var isWin = "" ;
+  var isPing = "" ;
+  function getResultData(paramJson){
+   		var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.jieguo";
+		      $.ajax({
+		        type: "POST",
+		        url: url,
+		        xhrFields: { withCredentials: true },
+		        crossDomain: true, 
+		        data:  paramJson,//传入游戏ID 
+		        dataType: "JSON",
+		        success: function (data ,textStatus, jqXHR)
+		        {
+		          if(data.code==0){
+		         	// alert(data.data) ;//界面赋值
+		         	 meHand = data.data.me_hand;
+		         	 sheHand = data.data.she_hand;
+		         	 isWin = data.data.is_win ;
+		         	 isPing = data.data.is_ping ;
+		         	 is_ok = data.data.is_ok ;
+		          } else{
+		             alert(data.msg);
+		          }
+		        },
+		        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+		            alert("请求失败！");
+		        }
+		      });
+	
+   }
+
+ //招数转换 1 剪刀 2 石头 3布
+ function changChuStr(data){
+ 	var chuStr = "" ;
+ 	switch (data) {
+ 		case "1":
+ 			chuStr = "剪刀" ;
+ 			break;
+ 		case "2":
+ 		    chuStr = "石头" ;
+ 		    break;
+ 		case "3":
+ 		 	chuStr = "布" ;
+ 		 	break;
+ 		default:
+ 			// statements_def
+ 			break;
+ 	}
+ 	return chuStr ;
+ }
+
+//获取图片方法
+function getImg(isWin,isPing){
+	var imgName = "" ;
+		if (isWin == 1) {
+				imgName = "win.png" ;
+		}else {
+			if(isPing == 1) {
+				imgName = "ping.png" ;
+			}else{
+				imgName = "lose.png" ;
+			}
+		}
+	return imgName ;
+}
+
+
+//时间戳转化成时间格式
+function timeFormat(timestamp){
+  //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+    console.log('时间：'+new Date(parseInt(timestamp) * 1000).toLocaleString());
+    return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');  
+   /* return year+'-'+add0(month)+'-'+add0(date)+' '+add0(hours)+':'+add0(minutes)+':'+add0(seconds);*/
+}
+
+
+function timestampToTime(timestamp) {
+        var date = new Date(parseInt(timestamp) * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        var Y = date.getFullYear() 
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) ;
+        var D = date.getDate()  < 10 ? '0'+date.getDate() : date.getDate() ;
+        var h = date.getHours() < 10 ? '0'+date.getHours() : date.getHours() ;
+        var m = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes() ;
+        var s = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds() ;
+        return Y+'-'+M+'-'+D+' '+h+':'+m+':'+s;
+    }
+
+/*关于战绩 界面操作*/
+var showBtn = document.getElementById("jilu") ;
+var cover = document.getElementsByClassName("cover")[0] ;
+var recordBox = document.getElementsByClassName("record-box")[0] ;
+var cancelBtn = document.getElementsByClassName("cancel-btn")[0]
+/*function show(){
+	alert("***") ;*/
+showBtn.onclick=function(){
+	cover.style.display="block" ;
+	recordBox.style.display="block" ;
+    getScoreList({id:id}) ;//获取列表数据
+}
+
+function getScoreList(paramJson){
+	
+	var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.myorder";
+		      $.ajax({
+		        type: "POST",
+		        url: url,
+		        xhrFields: { withCredentials: true },
+		        crossDomain: true, 
+		        data:  paramJson,//传入游戏ID 
+		        dataType: "JSON",
+		        success: function (data ,textStatus, jqXHR)
+		        {
+		         
+		          if(data.code==0){
+		          	 if(data.data.length == 0){
+		             	$(".end-list").html("--暂无数据--");
+		             	return ;
+		             }
+
+		             var dataHtml = "" ;
+		             var objArr = data.data ;
+		             $.each(objArr,function(i,ele){
+	             		//手势
+	             		var meHand = changChuStr(objArr[i].me_hand) ;
+						var sheHand = changChuStr(objArr[i].she_hand) ;
+						var addTime = timestampToTime(objArr[i].add_time) ;
+						var sfImg = getImg(objArr[i].is_win,objArr[i].is_ping) ;//图标
+	             		dataHtml += ' <div class="content-list clearfix"> ';
+						dataHtml += '	<span><img src="img/'+sfImg+'"></span>';
+						dataHtml += '	<span>'+meHand+'vs'+sheHand+'</span>';
+						dataHtml += '	<span>'+addTime+'</span>';
+						dataHtml += '</div>';
+	             	});
+		             $(".content-box-list").html(dataHtml) ;
+		          }
+		        },
+		        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+		            alert("请求失败！");
+		        }
+		      });
+}
+
+
+cancelBtn.addEventListener("click", function(){
+	cover.style.display="none" ;
+	recordBox.style.display="none" ;
+}) ;
+/*关于战绩 界面操作*/
+
+
+</script>
+</body>
+</html>

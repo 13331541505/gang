@@ -1,0 +1,346 @@
+{template '_header'}
+<script type="text/javascript" src="../addons/ewei_shopv2/static/js/dist/area/cascade.js"></script>
+<style>
+    .checkbox-inline{
+        display: block;
+    }    .btns a i{
+        display: inline-block;
+        width: 100%;
+        height: 20px;
+        background: #f95959;
+    }
+    .btn-color {
+        width: 25px;
+        height: 25px;
+        border: 1px solid #fff;
+        margin: 2px;
+        padding: 0;
+    }
+
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">{if !empty($item['id'])}编辑{else}添加{/if}游戏
+        <small>{if !empty($item['id'])}修改【{$item['storename']}】{/if}</small>
+    </span>
+</div>
+
+<div class="page-content">
+    
+<form {ife 'store' $item}action="" method="post"{/if} class="form-horizontal form-validate" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{$item['id']}"/>
+
+    <div class="form-group">
+        <label class="col-lg control-label must">游戏标题</label>
+        <div class="col-sm-9 col-xs-12">
+            {ife 'store' $item}
+            <input type="text" name="game_name" class="form-control" value="{$item['game_name']}"
+                   data-rule-required="true"/>
+            {else}
+            <div class='form-control-static'>{$item['game_name']}</div>
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg control-label must">游戏图片</label>
+        <div class="col-sm-9 col-xs-12">
+            {ife 'store' $item}
+                {php echo tpl_form_field_image2('game_img',$item['game_img'])}
+            {else}
+                {if !empty($item['game_img'])}
+                <a href='{php echo tomedia($item[' game_img'])}' target='_blank'>
+                <img src="{php echo tomedia($item['game_img'])}" style='width:100px;border:1px solid #ccc;padding:1px' onerror="this.src='../addons/ewei_shopv2/static/images/nopic.png'"/>
+                </a>
+                {/if}
+            {/if}
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-lg control-label">抽奖资格</label>
+        <div class="col-sm-9 col-xs-12">
+            <label class="checkbox-inline">
+                <input type="checkbox" value="1" name='is_cash[]' {if $item['is_cash']}checked{/if} /> 现金
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" value="2" name='is_cash[]' {if $item['is_tong']}checked{/if} /> 通用抽奖券
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" value="3" name='is_cash[]' {if $item['is_te']}checked{/if} /> 特殊抽奖券
+            </label>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-lg control-label">人数</label>
+        <div class="col-sm-10 col-xs-12">
+            {ife 'store' $item}
+                <label class="radio-inline" style="float: left;padding-left:0px;" data-rule-required="true">人数上限</label>
+                <div class="col-sm-9 col-xs-12" style="width: 120px; float: left; margin: 0px 20px 0px -5px;">
+                    <input type="text" value="{$item['member_max']}" class="form-control" name="member_max"
+                           style="width:120px;padding:5px;">
+                </div>
+                <label class="radio-inline" style="float: left;">最低开奖人数</label>
+                <div class="col-sm-9 col-xs-12" style="width: 120px; float: left; margin: 0px 20px 0px -5px;">
+                    <input type="text" value="{$item['member_min']}" class="form-control" name="member_min"
+                           style="width:120px;padding:5px;">
+                </div>
+                <div class="help-block">最低开奖人数填写‘0’或不填则不启用</div>
+            {else}
+                <div class='form-control-static'>人数上限:{$item['member_max']} 最低开奖人数:{$item['member_min']}</div>
+            {/if}
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-lg control-label">金额</label>
+        <div class="col-sm-10 col-xs-12">
+            {ife 'store' $item}
+                <label class="radio-inline" style="float: left;padding-left:0px;" data-rule-required="true">报名金额</label>
+                <div class="col-sm-9 col-xs-12" style="width: 120px; float: left; margin: 0px 20px 0px -5px;">
+                    <input type="text" value="{$item['game_money']}" class="form-control" name="game_money"
+                           style="width:120px;padding:5px;">
+                </div>
+                <label class="radio-inline" style="float: left;">最低开奖金额</label>
+                <div class="col-sm-9 col-xs-12" style="width: 120px; float: left; margin: 0px 20px 0px -5px;">
+                    <input type="text" value="{$item['money_min']}" class="form-control" name="money_min"
+                           style="width:120px;padding:5px;">
+                </div>
+                <div class="help-block">最低开奖金额填写‘0’或不填则不启用</div>
+            {else}
+                <div class='form-control-static'>报名金额:{$item['game_money']} 最低开奖金额:{$item['money_min']}</div>
+            {/if}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg control-label">固定开始时间</label>
+        <div class="col-sm-9 col-xs-12">
+            {php echo tpl_form_field_date('start_time',$item['start_time'],true);}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg control-label must">循环开始间隔(分钟)</label>
+        <div class="col-sm-9 col-xs-12">
+            <input type="number" name="time_for" class="form-control" value="{$item['time_for']}" />
+        </div>
+        <div class="help-block">请填写间隔分钟数</div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg control-label must">未达到要求延长时间</label>
+        <div class="col-sm-9 col-xs-12">
+            <input type="number" name="yan_time" class="form-control" value="{$item['yan_time']}" />
+        </div>
+        <div class="help-block">请填写分钟数</div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg control-label must">当前报名人数</label>
+        <div class="col-sm-9 col-xs-12">
+            <input type="number" name="ok_num" class="form-control" value="{$item['ok_num']}" />
+        </div>
+        <div class="help-block">默认为“0”</div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg control-label must">当前报名金额</label>
+        <div class="col-sm-9 col-xs-12">
+            <input type="number" name="ok_money" class="form-control" value="{$item['ok_money']}" />
+        </div>
+        <div class="help-block">默认为“0”</div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-lg control-label">核销方式</label>
+        <div class="col-sm-9 col-xs-12">
+            {ife 'store' $item}
+                <label class='radio-inline'>
+                    <input type='radio' name='hexiao' value='0' {if $item['hexiao']==0}checked{/if} /> 线上核销
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='hexiao' value='1' {if $item['hexiao']==1}checked{/if} /> 线下核销
+                </label>
+            {else}
+                <div class='form-control-static'>{if $item['hexiao']==1}线下核销{else}线上核销{/if}
+                </div>
+            {/if}
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-lg control-label must">奖励金额</label>
+        <div class="col-sm-9 col-xs-12">
+            <input type="number" name="jiang" class="form-control" value="{$item['jiang']}" />
+        </div>
+        <div class="help-block">线上核销活动需填写奖励金额</div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-lg control-label">触发条件</label>
+        <div class="col-sm-9 col-xs-12">
+            {ifp 'sysset.notice.edit'}
+            <label class="checkbox-inline">
+                <input type="checkbox" value="1" name='ok_where[]' {if in_array('1',json_decode($item['ok_where']))}checked{/if} />按开始时间触发
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" value="2" name='ok_where[]' {if in_array('2',json_decode($item['ok_where']))}checked{/if} /> 按最低开奖金额触发
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" value="3" name='ok_where[]' {if in_array('3',json_decode($item['ok_where']))}checked{/if} /> 按最低开奖人数触发
+            </label>
+            
+            {else}
+            <input type="hidden" name="data[ok_where]" value="{$data['ok_where']}"/>
+                <div class='form-control-static'>{if in_array('1',$ok_where)}按开始时间触发;{/if}
+                    {if  in_array('2',$ok_where)}按最低开奖金额触发;{/if}{if in_array('3',$ok_where)}按最低开奖人数触发;{/if}
+                </div>
+            {/if}
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-lg control-label">活动简介</label>
+        <div class="col-sm-9 col-xs-12">
+            {ife 'store' $item}
+            <textarea name="content" class="form-control richtext" rows="5" data-rule-required="true">{$item['content']}</textarea>
+            {else}
+            <div class='form-control-static'>{$item['content']}</div>
+            {/if}
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+                <label class="col-lg control-label">参与商品</label>
+                <div class="col-sm-9">
+                    <div class="form-group" style="height: auto; display: block;">
+                        <div class="col-sm-12 col-xs-12">
+                            {ife 'goods.group' $item}
+                            <div class="input-group">
+                                <input type="text" id="goodsid_text" name="goodsid_text" value="" class="form-control text" readonly="">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary select_goods" type="button">选择商品</button>
+                                </div>
+                            </div>
+                            <div class="input-group multi-img-details container ui-sortable goods_show">
+                                {if !empty($goods)}
+                                {loop $goods $g}
+                                <div class="multi-item" data-id="{$g['id']}" data-name="goodsid" id="{$g['id']}">
+                                    <img class="img-responsive img-thumbnail" src="{php echo tomedia($g['thumb'])}" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.png'" style="width:100px;height:100px;">
+                                    <div class="img-nickname">{$g['title']}</div>
+                                    <input type="hidden" value="{$g['id']}" name="goodsids[]">
+                                    <em onclick="remove({$g['id']})" class="close">×</em>
+                                    <div style="clear:both;"></div>
+                                </div>
+                                {/loop}
+                                {/if}
+                            </div>
+
+                        <script>
+                            $(function(){
+                                var title = '';
+                                $('.img-nickname').each(function(){
+                                    title += $(this).html()+';';
+                                });
+                                $('#goodsid_text').val(title);
+                            })
+                            myrequire(['web/goods_selector'],function (Gselector) {
+                                $('.select_goods').click(function () {
+                                    var ids = select_goods_ids();
+                                    Gselector.open('goods_show','',0,true,'',ids);
+                                });
+                            })
+                            function goods_show(data) {
+                                if(data.act == 1){
+                                    console.log(data,2222222);
+                                    // if(title.length>=1){
+                                    //     removeHtml('+data.id+');
+                                    // }
+
+                                    var html = '<div class="multi-item" data-id="'+data.id+'" data-name="goodsid" id="'+data.id+'">'
+                                        +'<img class="img-responsive img-thumbnail" src="'+data.thumb+'" onerror="this.src=\'../addons/ewei_shopv2/static/images/nopic.png\'" style="width:100px;height:100px;">'
+                                        +'<div class="img-nickname">'+data.title+'</div>'
+                                        +'<input type="hidden" value="'+data.id+'" name="goodsids[]">'
+                                        +'<em onclick="removeHtml('+data.id+')" class="close">×</em>'
+                                        +'</div>';
+                                    $('.goods_show').append(html);
+                                    var title = '';
+                                    $('.img-nickname').each(function(){
+                                        title += $(this).html()+';';
+                                    });
+                                    
+
+                                    $('#goodsid_text').val(title);
+
+                                }else if(data.act == 0){
+                                    remove(data.id);
+                                }
+                            }
+                            function remove(id){
+                                $("[id='"+id+"']").remove();
+                                var title = '';
+                                $('.img-nickname').each(function(){
+                                    title += $(this).html()+';';
+                                });
+                                $('#goodsid_text').val(title);
+                            }
+                            function select_goods_ids(){
+                                var goodsids = [];
+                                $(".multi-item").each(function(){
+                                    goodsids.push($(this).attr('data-id'));
+                                });
+                                return goodsids;
+                            }
+                        </script>
+                        {else}
+                            <div class="input-group multi-img-details container ui-sortable">
+                                {loop $goods $item}
+                                <div data-name="goodsid" data-id="426" class="multi-item">
+                                    <img src="{php echo tomedia($item['thumb'])}" class="img-responsive img-thumbnail">
+                                    <div class="img-nickname">{$item['title']}</div>
+                                </div>
+                                {/loop}
+                            </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <div class="form-group"></div>
+    <div class="form-group">
+        <label class="col-lg control-label"></label>
+        <div class="col-sm-9 col-xs-12">
+            {ife 'store' $item}
+            <input type="submit" value="提交" class="btn btn-primary"/>
+
+            {/if}
+            <input type="button" name="back" onclick='history.back()' {ifp  'game.add|game.edit'}style='margin-left:10px;'{/if} value="返回列表" class="btn btn-default" />
+        </div>
+    </div>
+</form>
+</div>
+<script language='javascript'>
+    $(function () {
+        $(':radio[name=type]').click(function () {
+            type = $("input[name='type']:checked").val();
+
+            if (type == '1' || type == '3') {
+                $('#pick_info').show();
+            } else {
+                $('#pick_info').hide();
+            }
+        })
+    })
+
+    
+
+   
+
+    cascdeInit("{php echo $new_area}","{php echo $address_street}","{php echo isset($item['province'])?$item['province']:''}","{php echo isset($item['city'])?$item['city']:''}","{php echo isset($item['area'])?$item['area']:''}","''");
+</script>
+{template '_footer'}

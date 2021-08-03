@@ -1,0 +1,11 @@
+{if !empty($navs)}
+	<div class="fui-icon-group noborder">
+		{loop $navs $item}
+			<div class="fui-icon-col" {if !empty($item['url'])} onclick="location.href='{$item['url']}'"{/if} style="width:20%;">
+				<div class="icon"><img src="{php echo tomedia($item['icon'])}" style="width:1.8rem;height:1.8rem;" /></div>
+				<div class="text" style="padding-top:.4rem;">{$item['navname']}</div>
+		    </div>
+		{/loop}
+	</div>
+ {/if}
+

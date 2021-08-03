@@ -1,0 +1,71 @@
+<style type='text/css'>
+    body { width:100%;}
+ 
+    .img-thumbnail { width:100px; height:100px;}
+    .img-nickname { height:25px;line-height:25px;width:90px;margin-left:5px;margin-right:5px;position: absolute;bottom:55px;color:#fff;text-align: center;background:rgba(0,0,0,0.7)}
+</style>
+<div class="region-goods-details row">
+    <div class="region-goods-left col-sm-2">选择商家</div>
+    <div class="region-goods-right col-sm-10">
+        
+
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">所属商家</label>
+            <div class="col-sm-9 col-xs-12 chks">
+                <?php echo tpl_selector('merchid',
+                    array('text'=>'merchname',
+                
+                'type'=>'text',
+                'placeholder'=>'门店名称',
+                'buttontext'=>'选择门店 ',
+                'items'=>$merch,
+                'url'=>webUrl('merch/user/query')))?>
+            </div>
+        </div>
+        
+        <!-- <input type="hidden" name="merchid" > -->
+
+       <!--  <div class="form-group">
+            <label class="col-sm-2 control-label">店铺描述</label>
+            <div class="col-sm-9 col-xs-12">
+                {ife 'goods' $item}
+                <input type="text" name="detail_totaltitle" class="form-control" value="{$item['detail_totaltitle']}" />
+                <span class='help-block'>如果不填写，系统默认选择小店或商城描述</span>
+                {else}
+                <div class='form-control-static'>{$item['detail_totaltitle']}</div>
+                {/if}
+            </div>
+        </div> -->
+
+        <!-- <div class="form-group">
+            <label class="col-sm-2 control-label">全部商品</label>
+            <div class="col-sm-9 col-xs-12">
+                {ife 'goods' $item}
+                <input type="text" class="form-control" name="detail_btntext1" value="{$item['detail_btntext1']}" placeholder="按钮名称" style="width:200px;float:left"  />
+                <input type="text" class="form-control" name="detail_btnurl1" value="{$item['detail_btnurl1']}" placeholder="按钮完整链接" style="width:400px;" />
+                <span class='help-block'>如果不填写，系统默认"全部商品"及"默认的全部商品链接"</span>
+                {else}
+                <div class='form-control-static'>{$item['btn_text1']} / {php echo empty($item['btn_url1'])?'默认':$item['btn_url1']}</div>
+                {/if}
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label">进店逛逛</label>
+            <div class="col-sm-9 col-xs-12">
+                {ife 'goods' $item}
+                <input type="text" class="form-control" name="detail_btntext2" value="{$item['detail_btntext2']}" placeholder="按钮名称" style="width:200px;float:left"  />
+                <input type="text" class="form-control" name="detail_btnurl2" value="{$item['detail_btnurl2']}" placeholder="按钮完整链接" style="width:400px;" />
+                <span class='help-block'>如果不填写，系统默认"进店逛逛"及"默认的小店或商城链接"</span>
+                {else}
+                <div class='form-control-static'>{$item['detail_btntext2']} / {php echo empty($item['detail_url2'])?'默认':$item['detail_url2']}</div>
+                {/if}
+            </div>
+        </div> -->
+    </div>
+</div>
+
+
+

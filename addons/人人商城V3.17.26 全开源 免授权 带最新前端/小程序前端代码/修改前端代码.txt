@@ -1,0 +1,14 @@
+
+
+
+
+
+配置app.js
+文件  
+
+globalData: {
+    appid: "小程序APPID",
+    api: "https://你的域名/app/ewei_shopv2_api.php?i=公众号的ID",
+    approot: "https://你的域名/addons/ewei_shopv2/",
+    userInfo: null
+  }

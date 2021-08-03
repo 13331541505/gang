@@ -1,0 +1,176 @@
+{template '_header'}
+<div class='fui-page  fui-page-current'>
+    <!-- <div class="fui-header">
+	<div class="fui-header-left">
+	    <a class="back"></a>
+	</div>
+	<div class="title">活动核销</div> 
+	<div class="fui-header-right">&nbsp;</div>
+    </div> -->
+    <div class='fui-content navbar'>
+
+	
+
+
+<!-- 	<div class="fui-list-group goods-list-group">  
+
+	    <div class="fui-list-group-title"><i class="icon icon-shop"></i> {$_W['shopset']['shop']['name']}</div>
+
+	    {loop $allgoods $g}
+	    <a href="{php echo mobileUrl('goods/detail',array('id'=>$g['goodsid']))}">
+
+		<div class="fui-list goods-list">
+		    <div class="fui-list-media">
+			<img src="{php echo tomedia($g['thumb'])}" class="round">
+		    </div>
+		    <div class="fui-list-inner">
+			<div class="text goodstitle">{$g['title']}</div> 
+			{if !empty($g['optionid'])}<div class='subtitle'>{$g['optiontitle']}</div>{/if}
+
+		    </div>
+		    <div class='fui-list-angle'>
+			￥<span class='marketprice'>{$g['price']}<br/>   x{$g['total']}
+		    </div>
+
+		</div>
+	    </a>
+	    {/loop}
+	</div> -->
+	
+	<div class='fui-cell-group'>
+	    <div class='fui-cell'>
+		<div class='fui-cell-label'>核销方式</div>
+		<div class='fui-cell-info'></div>
+		<div class='fui-cell-remark noremark'>{if $game['game_type']==1}线下核销{else}线上核销{/if}</div>
+	    </div>
+	</div>
+	
+	{if $game['game_type']!=1}
+	<div class='fui-cell-group'>
+	    <div class='fui-cell'>
+		<div class='fui-cell-label'>奖励金额</div>
+		<div class='fui-cell-info'></div>
+		<div class='fui-cell-remark noremark'>{$log['ok_money']}</div>
+	    </div>
+	</div>
+	{/if}
+
+	<div class='fui-cell-group'>
+	    <div class='fui-cell'>
+		<div class='fui-cell-label'>消费码</div>
+		<div class='fui-cell-info'></div>
+		<div class='fui-cell-remark noremark'>{$log['code']}</div>
+	    </div>
+	</div>
+
+	<div class='fui-cell-group'>
+	    <div class='fui-cell'>
+		<div class='fui-cell-label'>参加活动</div>
+		<div class='fui-cell-info'></div>
+		<div class='fui-cell-remark noremark'>{$log['game_title']}</div>
+	    </div>
+	</div>
+
+	<div class='fui-cell-group'>
+	    <div class='fui-cell'>
+		<div class='fui-cell-label'>报名日期</div>
+		<div class='fui-cell-info'></div>
+		<div class='fui-cell-remark noremark'>{php echo date('Y-m-d H:i',$log['add_time']) }</div>
+	    </div>
+	</div>
+
+	<!-- <div class='fui-according-group {if count($verifyinfo)<=3}expanded{/if} verify-container' data-orderid="{$order['id']}" data-verifytype="{$order['verifytype']}">
+	    <div class='fui-according expanded'>
+		<div class='fui-according-header'>
+		    <i class='icon icon-list'></i>	     
+		    <span class="text">消费码</span>
+		    <span class="remark"><div class="badge">{if  !empty($_GPC['verifycode'])}1{else}{$lastverifys}{/if}</div></span>
+		</div>
+		<div class="fui-according-content verifycode-container">
+
+		    <div class='fui-cell-group'>
+			{loop $verifyinfo $v}
+			{if empty($_GPC['single']) || ( !empty($_GPC['single']) && $v['select'] ) }
+			    <div class='fui-cell verify-cell' data-verifycode="{$v['verifycode']}">
+				<div class='fui-cell-label' style='width:auto'>
+				    {if !$v['verified']}
+				    <input type='checkbox' class='fui fui-checkbox fui-checkbox-danger verify-checkbox' {if !empty($v['select'])}checked{/if} 
+					   {if !empty($_GPC['single']) && $v['select']}style='display:none'{/if}
+					   />
+					   {/if}
+					   {$v['verifycode']}
+				</div>
+				<div class='fui-cell-info'></div>
+				<div class='fui-cell-remark noremark'>
+				    {if $v['verified']}
+				    <div class='fui-label fui-label-danger' >已使用</div>
+				    {else}
+				    <div class='fui-label fui-label-default' >未使用</div>
+				    {/if}
+
+				</div>
+			    </div>
+			
+			   {/if}
+		
+			{/loop}
+		    </div>
+
+
+		</div>
+	    </div>
+	</div> -->
+
+
+
+
+
+    </div>
+    <div class='fui-footer'>
+		<div class="btn btn-danger block submit" data-logid="{$log['id']}" data-verifytype="{$order['verifytype']}">
+		    <i class="icon icon-check"></i> 
+		    <span>确定使用</span>
+		</div>
+    </div>
+    <script language='javascript'>
+    	require(['biz/verify/detail'], function (modal) {
+                modal.init();
+            });
+    </script>
+</div>
+
+
+<script type="text/javascript">
+
+$('.submit').click(function(){
+	 FoxUI.confirm('您确认进行核销吗？',
+        function() {
+        	var id = $('.submit').attr('data-logid');
+        	$.get("{php echo mobileUrl('verify/game_hexiao')}",{id:id},function(e){
+        		// 0 != e.status ? location.href = f.getUrl("verify/success", {
+          //           id: r,
+          //           times: t
+          //       }) : FoxUI.toast.show(e.result.message)
+          		e = $.parseJSON(e);
+          		if(e.status==0){
+          			window.location.href="{php echo mobileUrl('verify/success')}";
+          		}else{
+          			alert('核销错误请稍后重试');
+          		}
+          		
+        	});
+            // f.json("verify/complete", {
+            //     id: r,
+            //     times: t,
+            //     verifycode: c
+            // },
+            // function(e) {
+            //     0 != e.status ? location.href = f.getUrl("verify/success", {
+            //         id: r,
+            //         times: t
+            //     }) : FoxUI.toast.show(e.result.message)
+            // })
+        })
+});
+</script>
+{template '_footer'}

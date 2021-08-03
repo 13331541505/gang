@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no, viewport-fit=cover" />
+	<style type="text/css">
+		*{padding: 0 ;margin: 0;}
+		html{font-size: 10px}
+		button{outline: none;}
+		.mg-top{margin-top: 2rem} .mg-bottom{margin-bottom: 0.5rem}
+		.clearfix:before,.clearfix:after {content: ""; display: block; clear: both; } 
+		.clearfix {zoom: 1; } 
+		.mg-top-10{margin-top: 1rem}
+		.container{font-family: 'Microsoft Yahei',"simsun"; padding: 13rem 0; background-image: url(img/details-bg.png); background-repeat: no-repeat; background-size: contain; background-attachment: fixed;overflow: hidden;} 
+		/* .container .daojs p{display: none} */
+		.container .daojs>div{display:none;}
+		.container .daojs .daojs-text>span::after,.container .daojs .daojs-text>span::before{content: "";position:absolute;border-top:1px solid #fff;width: 3rem;display:block;opacity: 0.3}
+		.container .daojs .daojs-text>span::after{ left: 100%; top: 50%; margin-left: 1rem;}.container .daojs .daojs-text>span::before{top: 50%; left: -4rem} 
+		.container .daojs{ height: 9rem;text-align: center; color: #fff; font-size: 1.5rem; text-align: center; position: fixed; top: 0; z-index: 2; background: #FF6244; width: 100%;} 
+		.container .daojs span{display:inline-block;margin: 3px;position: relative;}
+		.container .gamescore{ position: fixed; z-index: 1000; top: 1rem; right: 1rem;} 
+		.container .gamescore a{ text-align: center; display: inline-block; color: #fff; text-decoration: none;}
+    	.container .gamescore img{width: 3rem}
+		.container .gamescore p{font-size: 1.2rem}
+		.container .container-content-box{    overflow: auto; background: #fff;padding: 0.5rem} 
+		.container h1{font-size: 2rem;padding: 1rem 0;text-align: center}
+		.container .event-time{font-size: 1.2rem;color: rgb(119, 119, 119);}
+		.container h1 i{padding: 0.5rem;}
+		.container h1 img{width: 0.5rem;vertical-align: middle;}
+		.container .event-content{color: #353535;font-size: 1.5rem;}
+		.container .event-content a{width: 50%;float: left;padding: 1rem;box-sizing: border-box;text-align: center;text-decoration: none;color: #ddd}
+		.container .event-content img{width: 14rem}
+		.container .event-content p{    text-align: center; height: 5rem; line-height: 1.5rem; overflow: hidden; font-size: 1.2rem; text-overflow: ellipsis;color: #b2b2b2}
+		footer{position: fixed;bottom: 0;width: 100%;z-index: 2;text-align:center;align-items: center; }
+		footer button{    text-align: center; background: #DE2626; width: 70%; color: white; outline: none; border: 0; height: 4rem; line-height: 4rem; font-size: 2rem; margin: 0 auto; letter-spacing: 0.2rem; border-radius: 5rem;}
+		footer .singup-container{background: #fbf9f5;padding: 1rem 0 }
+		footer .singup-container span{display: inline-block;padding: 0 .7rem}
+		footer .card-container{height: 3rem;background-color: #FEFBDC;display: flex;flex-direction: row;justify-content:space-between;}
+		footer .card-container .card-num i{color:red;font-style: normal;}
+		footer .card-container .right-arrow{  display: inline-block; background-image: url(img/icon-select.png); width: 1rem; height: 1rem; background-size: contain;margin-left: 0.5rem} 
+		footer .card-container div{padding: 0.7rem 1.2rem; font-size: 1.2rem;} /* 弹框样式 */
+		.tk-box{ display: none; } 
+		.modal{    width: 28rem; /* height: 12rem; */ border-radius: 1rem; box-shadow: 0 0 0.1rem #aaaaaa; position: absolute; top: 50%; right: 50%; margin-top: -10rem; margin-right: -14rem; background: white; background-size: 42%; z-index: 10;} 
+		.modal .tk-title{    text-align: center; padding-top: 1rem; margin-bottom: 0.1rem; font-size: 1.5rem; color: #111111; letter-spacing: 0.1rem;} 
+		.modal .tk-content{    text-align: left; font-size: 1rem; padding: 1.5rem 2rem; color: #888; font-size: 1.5rem;} 
+	    .cancel-btn{position: absolute;right: 0.7rem;top:0.7rem;}
+		.cancel-btn a{width: 2.6rem; height: 2.6rem; display: block; background: url(img/cancel-btn.png) no-repeat; background-size: 100% 100%; } .tk-content{text-align: center;font-size: 1rem;color: #ddd;}
+		.tk-footer-cn{width: 100%;margin: 0 auto ;display: flex;}
+		.tk-footer{   position: relative; display: block; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; color: #666; text-decoration: none; text-align: center; color: #666; border-top: 1px solid #D5D5D6; padding:0.8rem 0.5rem; font-size: 1.5rem;} 
+		.tk-footer:nth-child(2)::before{    content: ""; position: absolute; left: 0; top: 0; border: 1px solid #D5D5D6; /* width: 1px; */ height: 99%; display: inline-block;transform: scale(0.8);-webkit-transform: scale(0.5);} /* 遮罩层 */
+		/* 遮罩层 */
+		.fullScreen{position: fixed; width: 100%;height: 100%;left: 0;top: 0;opacity: 0.3; background-color: #ddd;z-index: 5;}
+
+
+		/* 战绩详情 css start */
+	.record-box{width: 100%;height: 95%; background: #fff9e3;  border-top-left-radius:10px ;border-top-right-radius:10px ; 
+		/*  margin: 0 auto;  */position: fixed;/*  z-index: 30;  */ bottom: 0px;  display: none;/*  overflow: hidden; */z-index: 99999 } /* .record-container{width: 90% ; background: #fff9e3 ; border-radius: 10px ; margin: 0 auto ; position: absolute; z-index: 2 ; } */ 
+	.record-box .cancel-btn{position: absolute; right:0rem ; top:0.6rem; width: 40px ; height: 40px ;  }
+	.record-box .cancel-btn img{width: 2rem ; height: 2rem; }
+	.content-box{  height: 50rem; overflow-x: hidden;overflow-y:auto/*   */ /*    */ } 
+	.record-container h1{color: #83685d ; text-align: center; font-size: 1.5rem ; padding:10px 0 ; margin: 0px ; /* border-bottom: 1px solid  #bbae9e ; */ 
+						box-shadow: 0 0 15px #8e5e5a; border-radius: 10px ; } 
+	.record-container  .content-list{border-bottom: 1px solid  #fff ; margin: 1rem 2rem ; font-size: 2rem; height: 2.5rem; line-height: 1.8rem; } 
+	.record-container  .content-list span{float: left;margin-right: 1.1rem;color: #ab9b8c;font-size: 1.3rem}
+	.record-container  .content-list span:nth-child(2){width:25%}
+	.record-container  .content-list img{width: 1.6rem;height: 1.6rem;}
+	.record-container .icon-flag{width: 40px;height: 40px; background-size: 100%} 
+	.record-container .detail-info p {padding: 0px;margin: 0px;color:#ab9b8c;font-size: 25px; line-height: 45px} 
+	.l{float: left; } .r{float: right; } 
+	.fgx-div{width: 100%;height: 2px;background: #ffffff} 
+	.end-list{text-align: center; font-size: 1.3rem; color: #ab9b8c; padding: 3rem;display: none;} /* 清除浮动样式4 *//* 使用双伪元素清除浮动 */
+	.clearfix:before,.clearfix:after {content: ""; display: block; clear: both; } 
+	.clearfix {zoom: 1; } /* 遮罩层样式 */ 
+	.cover{ display:none;  width:100%; height:100%; position:absolute; top:0; left:0; z-index:99990; background-color:#000; opacity:0.3; /* display:none; */ } 
+	/* .record-box{animation: animate 1s ease 1; -webkit-animation:animate 3s 1; Safari 和 Chrome } */
+	@keyframes animate{from {bottom:-100%;} to {bottom: 0 } } 
+
+/* 加载中样式 */
+.loading{display:none;}
+.loading img{position: absolute; z-index: 9999; width: 3rem; height: 3rem; top: 50%; margin-top: -1.5rem; right: 50%; margin-right: -1.5rem;animation:1s rotate  ease-in-out infinite ;
+-webkit-animation:1s rotate  ease-in-out infinite ;}
+@keyframes rotate{
+     from{
+         transform: rotate(0deg);
+     }
+     to{
+          transform: rotate(360deg);
+     }
+}
+@-webkit-keyframes rotate{
+     from{
+        -webkit-transform: rotate(0deg);
+     }
+     to{
+        -webkit-transform: rotate(360deg);
+     }
+}
+
+@media (min-width: 768px) { 
+	.container .container-content-box{min-height: 30rem}
+ }
+
+
+
+    </style>
+</head>
+<body> 
+	<div class="container">
+		<section class="daojs">
+			<div class="daojs-text mg-top mg-bottom" id="daojstext"><span>距离活动结束仅剩</span></div>
+			<div id="djsTime"><span id="djsDay">30</span>天<span id="djsHour">59</span>:<span id="djsMinute">59</span>:<span id="djsSecond">59</span></div>
+			<div id="djsStop" style="line-height:9rem">活动停止</div>
+		</section>
+		<!-- <div class="gamescore"><a href="javascript:;" id="jilu"><img src="img/icon-cores-list.png"><p>游戏记录</p></a></div> -->
+        <div class="container-content-box">
+			        <section>
+						<h1><i><img src="img/yellow-circle.png"></i><span id="event-theme">活动主题</span><i><img src="img/yellow-circle.png"></i></h1>
+						<p class="event-time"></p>
+						<p class="event-content"></p>
+					</section>
+					<section>
+						<h1 class="mg-top-10" id="prize-title"><i><img src="img/yellow-circle.png"></i>参赛商品<i><img src="img/yellow-circle.png"></i></h1>
+						<div class="event-content clearfix" id="prize">
+							<!-- <a href="#"><img src="img/book_01.png"><p>小米 ipad 数码相机</p></a> -->
+						</div>
+					</section>
+        </div>
+
+         
+</div>
+
+
+<footer>
+	<!-- <div class="card-container"><div>购买商品可获得报名券</div> --><!-- <div class="card-num" id="cardnum"><span>共 <i>3</i> 张</span><span class="right-arrow"></span></div> </div>-->
+	<div class="singup-container"><button id="sign-up">立即报名</button></div>
+</footer> 
+
+
+<!-- 战绩详情 -->
+<section>
+	<div class="record-box">
+		<div class="record-container  clearfix">
+			<h1 class="clearfix">我的游戏记录</h1>
+			<div class="cancel-btn"><img src="img/cancel-btn-gray.png"></div>
+			<!-- <div class="fgx-div"></div> -->
+			<div class="content-box">
+				<div class="content-box-list">
+			<!-- 		 <div class="content-list clearfix">
+									<span><img src="img/lose.png"></span>
+									<span>石vs布</span>
+									<span>2020-05-16 13：00</span>
+								</div>
+								
+								<div class="content-list clearfix">
+									<span><img src="img/fair.png"></span>
+									<span>石vs布</span>
+									<span>2020-05-16 13：00</span>
+								</div>
+								
+								<div class="content-list clearfix">
+									<span><img src="img/win.png"></span>
+									<span>石vs布</span>
+									<span>2020-05-16 13：00</span>
+								</div> -->
+					
+				
+				</div>
+				<p class="end-list clearfix">--全部数据--</p>
+			</div>
+		</div>
+	</div>
+		<!-- 遮罩层 -->
+	<div class="cover"></div>
+	<!-- <button onclick="show()" id="showBtn">显示</button> -->
+</section>
+
+ <!--弹框-->
+ <section class="tk-box" id="tkBox">
+    <div class="section">
+        <div class="container">
+               <div class="modal">
+               	 <h2 class="tk-title" >提醒</h2>
+                  <p class="tk-content" id="isSuccess">确定要使用<span id="payTypeInfo"></span>支付吗？</p>
+                 <div class="cancel-btn">
+	                  <a href="javascript:;"><!-- <img src="cancel-btn.png"> --></a>
+	             </div>
+	             <div class="tk-footer-cn">
+	                 <a href="javascript:;" class="tk-footer" id="goBack">取消</a>
+	             </div>
+               </div>
+        </div>
+        <!--遮罩层-->
+        <div class="fullScreen"></div>
+    </div>
+ </section>
+
+<!-- 加载中... -->
+ <div class="loading"> <img src="img/loading.png"> </div>
+
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+			$(".loading").show() ;
+			var id = getGameId() ;
+			var eventObj = {} ;
+			var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.game_list";
+	/*		var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.game&game_id=3"*/
+		      $.ajax({
+		        type: "POST",
+		        url: url,
+		        xhrFields: { withCredentials: true },
+		        crossDomain: true, 
+		        data:  "",//传入活动id
+		        dataType: "JSON",
+		        success: function (data ,textStatus, jqXHR)
+		        {
+		        	data = data.data ;
+		        	eventObj = getEventObj(id,data) ;
+
+		        	//显示倒计时
+		        	getDjs(eventObj) ;
+		        	
+		        	if(eventObj.status!=0){
+		        		
+		        		window.location.href = 'index.html';
+		        	}
+		        	$(".event-time").html(eventObj.start_time) ; //活动开始时间
+		        	$("p.event-content").text(eventObj.content) ;//活动内容
+
+		        	//显示奖品列表
+		        	getGoodsList(eventObj.goods) ;
+
+		        	//报名按钮的显示形式
+		        	signUpBtnShap(eventObj) ;
+
+		        	$(".loading").hide() ;
+
+		        },
+		        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+		           showBmTips("","请求失败","")
+		        }
+		      });
+
+		      /*倒计时*/
+		      function getDjs(eventObj){
+				var timerInterval = setInterval(function(){
+	        		dao_time(eventObj,timerInterval) ;
+	        	},1000) ;
+        	 }
+               
+               //显示奖品列表
+               function getGoodsList(arr){
+               	   var html = "" ;
+               	   	if (arr.length==0) {
+               				$("#prize-title").hide() ;
+               				return ;
+               		}
+               		$.each(arr,function(i,ele){
+               			html +=	'<a href="javascript:;" onclick="jumpToPrize('+arr[i].id+')"><img src="'+arr[i].thumb+'"><p>'+arr[i].title+'</p></a>';
+               		}) ; 
+               		$("#prize").append(html) ;
+               }
+
+
+		      //获取该活动的对象信息 id 活动id，data 活动列表
+		      function getEventObj(id,data){
+		      	    var eventObj = {} ;
+		      		$.each(data,function(index,ele){
+		      			var obj = data[index] ;
+		      			if (id==obj.id) {
+		      				eventObj = obj ;
+		      				//eventObj.prize = getItemsGoods(obj.goods) ; //将奖品数组转成字符串
+		      			}
+		      		}) ;
+		      		return eventObj ;
+		      }
+
+
+			////报名按钮文字显示(传入活动内容对象)
+			function signUpBtnShap(eventObj){ 
+				   var $signUpBtn =  $("#sign-up") ;
+			       if (eventObj.is_baoming == 1) { //"is_baoming" 1已报名 0未报名
+			           $signUpBtn.html("进入游戏") ;
+			       }else {
+			 
+			  }
+			}
+
+
+			//报名(传入游戏id，0成功，1失败) 报名按钮
+			$("#sign-up").click(function(){
+
+				var signUpText = $("#sign-up").html() ;
+				var url = "" ;
+		
+				  if(signUpText=="立即报名"){
+				 		if (eventObj.jinxing == 1) {
+				 			showBmTips("","游戏进行中，不可报名","") ; //提示信息
+				 			return ;
+				 		}
+
+				 		if (eventObj.member_max <= eventObj.sum ) {
+				 			showBmTips("","人数已满，不可报名","") ; //提示信息
+				 			return ;
+				 		}
+						//活动开始前20s停止报名
+				 	    var sc = getIntervalHour(new Date(),new Date(eventObj.start_time)) ;
+				 	    var tipsinfo ="" ;
+				 	    if(0<sc && sc<60 ){
+				 	    	showBmTips("","开赛前60秒,停止报名","") ; //提示信息
+				 	    	return ;
+				 	    }else if (sc <= 0){
+				 	    	showBmTips("","比赛结束,停止报名","") ; //提示信息
+				 	    	return ;
+				 	    }
+				 		window.location.href = 'payment.html?param='+id ; //跳转到支付界面
+
+				 }else if(signUpText=="进入游戏"){
+				 	  window.location.href='gGame.html?param='+id ; //跳转到游戏页面
+				 }
+			});
+
+
+			//获取时差
+			function getIntervalHour(nowTime, startTime) {
+				var ms = startTime.getTime() - nowTime.getTime();
+				//if (ms < 0) return 0;
+				return Math.floor(ms/1000);
+			}
+
+			//报名接口
+			/*function signUp(url,id){
+			      $.ajax({
+			        type: "POST",
+			        url: url,
+			        xhrFields: { withCredentials: true },
+			        crossDomain: true, 
+			        data:  {id:id},//传入游戏ID {i:2,c:"entry",m:"ewei_shopv2",do:"mobile",r:"api.game_list"},
+			        dataType: "JSON",
+			        success: function (data ,textStatus, jqXHR)
+			        {
+			          if(data.code==0){
+			           // var entryType = cash==1?"现金":(tong==1?"通用优惠劵":"特殊优惠券" );
+			              showBmTips("",data.msg,$("#sign-up")) ; //提示信息
+			              isClick = !isClick ;
+			              // $("#signUpText").prop({disabled:false}) ;
+			          } else{
+			              showBmTips("",data.msg,$("#sign-up")) ;
+			              isClick = !isClick ;
+			          }
+
+			        },
+			        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+			           showBmTips("","请求失败","")
+			        }
+			      });
+			}
+*/
+
+			//提示框 显示 隐藏
+			/*entryType 什么报名的 （现金劵 优惠劵 特殊劵）
+			  isSuccess 是否成功
+			*/
+			function showBmTips(entryType,isSucceed,$eleBtn){
+			   //显示弹框
+			   $("#tkBox").show();
+			   //赋值
+			   $("#isSuccess").html(isSucceed) ;
+			   if (isSucceed.indexOf("成功") != -1) { //如果返回的提示信息包含"成功"，将该报名按钮text改为"已报名"，并将按钮设置未 不可操作
+			      if ($eleBtn) {
+			      	 $eleBtn.html('进入游戏');
+			      }
+			   }
+			}
+
+
+		 //弹框关闭(点差)
+		 $(".cancel-btn a").click(function(){
+		    var tkBox = $("#tkBox").hide() ;
+		  }) ;
+		//弹框关闭（点返回）
+		$("#goBack").click(function(){
+		      $("#tkBox").hide()
+		});
+
+	
+
+
+
+	//工具类倒计时
+	function dao_time(enentObj,timerInterval){
+
+	      var end_time = enentObj.start_time ;
+	      end_time =  end_time.replace('-','/').replace('-','/');
+	      var nowtime = new Date(),          //获取当前时间
+	          endtime = new Date(end_time);  //定义结束时间
+	       
+	      var timeInfo = "" ;
+	         var lefttime = endtime.getTime() - nowtime.getTime(),  //距离结束时间的毫秒数
+	             leftd =  add0(Math.floor(lefttime/(1000*60*60*24))),     //计算天数
+	             lefth =  add0(Math.floor(lefttime/(1000*60*60)%24)),     //计算小时数
+	             leftm =  add0(Math.floor(lefttime/(1000*60)%60)),        //计算分钟数
+	             lefts =  add0(Math.floor(lefttime/1000%60));         //计算秒数
+	             if(lefttime<0 ){   //活动结束
+	             	  $(".daojs").find('div').show() ;
+	             	  $("#daojstext").hide() ;
+	             	  $("#djsTime").hide() ;
+	             	  $("#djsStop").show() ;
+
+	             	 //如果活动结束。向后台请求数据,获取最新开始时间
+	             	 getDelayTime(timerInterval) ;
+	             	 clearInterval(timerInterval) ;
+	             }else {
+	             	
+	             	  $(".daojs").find('div').show() ;
+	             	  $("#daojstext").show() ;
+	             	  $("#djsTime").show() ;
+	             	  $("#djsStop").hide() ;
+	             	 
+
+	                 $("#djsDay").html(leftd) ;
+	                 $("#djsHour").html(lefth) ;
+	                 $("#djsMinute").html(leftm) ;
+	                 $("#djsSecond").html(lefts) ;
+
+	             }
+
+	      //return timeInfo;  //返回倒计时的字符串
+	}
+	//重新调用接口，判断是否延时
+	function getDelayTime(timerInterval){
+		setTimeout(function() {
+			isDelay(timerInterval) ;
+		}, 1000);
+		 
+	}
+
+	/*判断是否延时方法*/
+	function isDelay(timerInterval){
+		var id =  getGameId() ;
+		var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.game_list" ;
+		$.ajax({
+		        type: "POST",
+		        url: url,
+		        xhrFields: { withCredentials: true },
+		        crossDomain: true, 
+		        data:  {game_id:id},//传入游戏ID {i:2,c:"entry",m:"ewei_shopv2",do:"mobile",r:"api.game_list"},
+		        dataType: "JSON",
+		        success: function (data ,textStatus, jqXHR)
+		        {
+		         var  obj = getEventObj(id,data);
+
+		         var sc = getIntervalHour(new Date(),new Date(obj.start_time)) ;
+		         if (sc>=0) { //证明延时
+		         	 $("#djsStop").hide() ;
+		         	 getDjs(obj) ; //调用倒计时的方法
+		         }else{
+		         	clearInterval(timerInterval)
+		         }
+		        },
+		        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+		           showBmTips("","请求失败","")
+		        }
+		      });
+	}
+
+	  //时间补0
+     function add0(str){
+     	if (str<10) {
+     		str = "0" + str ;
+     	}
+     	return str ;
+     }
+	
+	//人数和钱数是否都达到要求 返回true为达到要求 返回false没有达到要求 
+	function isTrig(data){
+	   /* var flagT = false ;*/
+	    var flagM = false ; //是否达到人数标志
+	    var flagP = false ; //是否达到最底钱数标志
+	   /* if (data.is_time == 1) {
+
+	    }*/
+
+	    if (data.is_member == 1) {
+	       if(data.member_min > data.sum){
+	          //未满足条件 继续获取时间
+	          flagM = false ;
+	       }
+	    }else{
+	       flagM = true  ;
+	    }
+
+	    if (data.is_price == 1 ) {
+	      if (data.money_min > data.ok_money) {
+	        //未满足条件 继续获取时间
+	        flagP = false ;
+	      }
+	    }else{
+	      flagP = true ;
+	    }
+
+	    return flagM && flagP ;
+	}
+}) ;
+
+//获取上个界面传来的id
+    function getGameId(){
+            var loc = location.href;
+			var n1 = loc.length;
+			var n2 = loc.indexOf('=');
+			id = loc.substr(n2+1,n1-n2); //游戏id
+			return id ;
+    }
+
+
+
+/*关于战绩 界面操作*/
+var showBtn = document.getElementById("jilu") ;
+var cover = document.getElementsByClassName("cover")[0] ;
+var recordBox = document.getElementsByClassName("record-box")[0] ;
+var cancelBtn = document.getElementsByClassName("cancel-btn")[0]
+
+showBtn.onclick=function(){
+	cover.style.display="block" ;
+	recordBox.style.display="block" ;
+    getScoreList({id:getGameId()}) ;//获取列表数据
+}
+
+function getScoreList(paramJson){
+	$(".loading").show() ;
+	var url = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=api.myorder";
+		      $.ajax({
+		        type: "POST",
+		        url: url,
+		        xhrFields: { withCredentials: true },
+		        crossDomain: true, 
+		        data:  paramJson,//传入游戏ID 
+		        dataType: "JSON",
+		        success: function (data ,textStatus, jqXHR)
+		        {
+		         
+		          if(data.code==0){
+		          	 if(data.data.length == 0){
+		          	 	 $(".end-list").show() ;
+		             	 $(".end-list").html("--暂无数据--")
+		             	 $(".loading").hide() ;
+		             	return ;
+		             }
+
+		             var dataHtml = "" ;
+		             var objArr = data.data ;
+		             $.each(objArr,function(i,ele){
+	             		//手势
+	             		var meHand = changChuStr(objArr[i].me_hand) ;
+						var sheHand = changChuStr(objArr[i].she_hand) ;
+						var addTime = timestampToTime(objArr[i].add_time) ;
+						var sfImg = getImg(objArr[i].is_win,objArr[i].is_ping) ;//图标
+	             		dataHtml += ' <div class="content-list clearfix"> ';
+						dataHtml += '	<span><img src="img/'+sfImg+'"></span>';
+						dataHtml += '	<span>'+meHand+'vs'+sheHand+'</span>';
+						dataHtml += '	<span>'+addTime+'</span>';
+						dataHtml += '</div>';
+	             	});
+		             $(".content-box-list").html(dataHtml) ;
+		             $(".end-list").show() ;
+		          }
+		           $(".loading").hide() ;
+		        },
+		        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+		            alert("请求失败！");
+		        }
+		      });
+}
+
+//招数转换 1 剪刀 2 石头 3布
+ function changChuStr(data){
+ 	var chuStr = "" ;
+ 	switch (data) {
+ 		case "1":
+ 			chuStr = "剪刀" ;
+ 			break;
+ 		case "2":
+ 		    chuStr = "石头" ;
+ 		    break;
+ 		case "3":
+ 		 	chuStr = "布" ;
+ 		 	break;
+ 		default:
+ 			// statements_def
+ 			break;
+ 	}
+ 	return chuStr ;
+ }
+
+ function timestampToTime(timestamp) {
+        var date = new Date(parseInt(timestamp) * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        var Y = date.getFullYear() 
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) ;
+        var D = date.getDate()  < 10 ? '0'+date.getDate() : date.getDate() ;
+        var h = date.getHours() < 10 ? '0'+date.getHours() : date.getHours() ;
+        var m = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes() ;
+        var s = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds() ;
+        return Y+'-'+M+'-'+D+' '+h+':'+m+':'+s;
+    }
+
+//获取图片方法
+function getImg(isWin,isPing){
+	var imgName = "" ;
+		if (isWin == 1) {
+				imgName = "win.png" ;
+		}else {
+			if(isPing == 1) {
+				imgName = "ping.png" ;
+			}else{
+				imgName = "lose.png" ;
+			}
+		}
+	return imgName ;
+}
+
+cancelBtn.addEventListener("click", function(){
+	cover.style.display="none" ;
+	recordBox.style.display="none" ;
+}) ;
+/*关于战绩 界面操作*/
+
+//商品详情 跳转到改商品明细
+function jumpToPrize(id){
+	window.location.href = "/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=goods.detail&id="+id ;
+}
+
+</script>
+</body>
+</html>

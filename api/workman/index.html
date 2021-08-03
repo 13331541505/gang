@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<title></title>
+</head>
+<body>
+	<input type="text" name="" id="text"><br>
+	<input type="submit" name="ok" id="ok">
+	<div class="con"></div>
+</body>
+</html>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+var ws = new WebSocket("wss://gang.ddswfw.com:2000");
+ws.onopen = function() {
+
+    // 向WS服务器发送一个消息
+// 	$('#ok').click(function(){
+// 		text = $('#text').val();
+		ws.send('uid21321');
+// 	});
+	
+
+	// 接收WS服务器返回的消息
+	ws.onmessage = function(e){
+		$('.con').append("收到回复"+e.data+"<br>");
+		console.log(e.data);
+	}
+
+	// 主动断开长连接
+	// ws.close();
+	// ws.onclose = function(){
+	// 	alert('已断开');
+	// }
+}
+</script>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no, viewport-fit=cover" />
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" type="text/css" href="/web/game/css/style.css?555"/>
+    <link rel="stylesheet" type="text/css" href="/web/game/css/iconfont.css?666"/>
+    <style type="text/css">
+        body{ background: #F5F5F5;overflow: hidden;}
+        .aui-flex{background:#fff!important ;-webkit-align-items: flex-start!important}
+        .aui-flex-box h2{color: #000000!important;margin-bottom: 0.8rem}
+        .aui-flex-box p{color:#A3A4A6!important;}
+        .aui-flex-box h4,.aui-flex-box h3{color:#A3A4A6;margin-bottom: 0.2rem}
+        .aui-flex-box p.baoming-num span{margin: 0 2px}
+        .aui-flex-box p.baoming-num span:nth-child(2){margin-left:5px;margin-right: 3px}
+         .aui-flex-box p.baoming-num i{font-style: normal;}
+        .aui-list-box .aui-flex{border-radius: 10px!important}
+        .aui-flex-box .baoming-tip{ position: absolute; right: 0.7rem; bottom: 1rem;font-size: 1rem}
+        .aui-flex-box .baoming-tip span:first-child{font-size: 0.7rem;margin-right: 2px} 
+        .aui-flex-box .baoming-tip span:nth-child(2){font-size: 0.8rem}
+        .color-green{color: #04fd82}
+        .color-red{color:#fb4b4f;}
+        .color-orange{color:#FAA207;}
+        /* 无数据显示图片 */
+        .nodata{    width: 20rem; position: absolute; top: 50%; margin-top: -10rem; left:50%;margin-left:-10rem;display: none}
+
+
+          /* 参赛榜头部 */
+        .mall-over-view{width: 100%;height: 7rem;padding: 10px;position: relative;}
+        .mall-over-view .head-pic{position: absolute;top: 0;left: 0;width:100%;height: 100%}
+        .mall-over-view .bg-img{ /* background-image: url(/web/game/img/headpic.png); */background-image: linear-gradient( rgba(255,0,0,0.6), rgba(255,0,0,0.2));border-bottom-left-radius: 35%;
+    border-bottom-right-radius: 35%;}
+        .mall-over-view .bg-color{}
+        .mall-over-view .content-cs{width: 100%; height: 7rem; background: #fff;margin: 2rem auto 0; position: relative; z-index: 2; border-radius: 5px;box-shadow: 0 2px 8px 0 rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 2px 8px 0 rgba(0,0,0,.1);
+    -moz-box-shadow: 0 2px 8px 0 rgba(0,0,0,.1);font-size: 0.8rem;color:#CECECE;}
+        .mall-over-view .content-cs::before{    content: ""; background-image: url(/web/game/img/head-flag.png); position: absolute; width: 15rem; height: 2rem; background-size: contain; background-repeat: no-repeat; top: -0.85rem; left: 50%; margin-left: -7.5rem;} 
+        .mall-over-view .content-cs .game-rule{ text-align: right;  } 
+        .mall-over-view .content-cs .game-rule a{background: #FC6262; color: #fff; padding:0.2rem 0.4rem; display: inline-block; font-size: 0.8rem; border-top-left-radius: 10px; border-bottom-left-radius: 2px;margin-top: 0.1rem} 
+        .mall-over-view .content-cs .item{ display: flex; justify-content: space-around; margin-top: 1rem;}
+        .mall-over-view .content-cs .item a{text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;} 
+        .mall-over-view .content-cs .item a p{opacity: 0.6;letter-spacing: 0.2rem;font-weight: bold;}
+        .mall-over-view .content-cs .item a p strong{font-size: 1rem}
+        .mall-over-view .content-cs .item a img{width: 2.5rem}
+
+        /* 遮罩 */
+        .fullScreen {display:none;position: fixed; width: 100%; height: 100%; left: 0; top: 0; opacity: 0.7; background-color: #000; z-index: 9999; } 
+        /* 刚一下游戏规则弹框 */
+        .scorebox{display:none;position: absolute; border-radius: 5px; z-index: 99999; background: #fff; width: 20rem; left: 50%; top: 50%; margin-left: -10rem; margin-top: -12rem;padding: 1rem}
+        .scorebox .cancel-box{width: 1.5rem; position: absolute; top: -2.2rem; left: 50%; margin-left: -0.75rem;} 
+        .scorebox .scorebox-title{font-size: 1.1rem; color: #8A6236; text-align: center;margin-bottom: 1rem} 
+        .scorebox .scorebox-content{overflow: auto; color: #000;opacity: 0.8  ;font-size: 0.9rem; line-height: 1.3rem; max-height: 20rem;min-height:10rem;text-align: center}
+
+        .mg-top3{margin-top: 3rem}
+    </style>
+</head>
+<body>
+
+<!--参赛榜-->
+ <div class="mall-over-view" id="csbBox">
+    <div class="head-pic bg-img"></div>
+    <div class="head-pic bg-color"></div>
+    <div class="content-cs">
+        <div class="game-rule"  id="gameRule"><a href="javascript:;">游戏规则</a></div>
+        <div class="item">
+            <a href="javascript:;" id="csjlBtn"><img src="/web/game/img/enter-sum.png"><p>参赛记录</p></a>
+            <a href="javascript:;" id="rank"><img src="/web/game/img/icon-cores-list.png"><p>排名<!-- <strong id="csTotal"></strong> --></p></a>
+        </div>
+    </div>
+ </div>
+
+<!--游戏规则-->
+ <div class="scorebox" id="scoreBox">
+    <a href="#" class="cancel-box" id="cancelBox"><img src="/web/game/img/cancel-btn-gray.png"></a>
+    <h1 class="scorebox-title">游戏规则</h1>
+    <div class="scorebox-content" id="ruleDetail">
+    </div>
+ </div>
+
+<!--遮罩层-->
+<div class="fullScreen"></div>
+
+<!--活动列表-->
+  <section class="aui-flexView mg-top3">
+      <section class="aui-scrollView">
+          <div class="aui-tab" data-ydui-tab>
+              <div class="tab-panel">
+                  <div class="tab-panel-item tab-active">
+                    <div class="aui-list-box" id="list-box">
+                
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  </section>
+ <!--请求失败 弹框-->
+ <section class="tk-box" id="tkBox">
+    <div class="section">
+        <div class="container">
+               <div class="modal">
+                 <h2 class="tk-title" >提醒</h2>
+                  <p class="tk-content" id="isSuccess"></p>
+                 
+                 <div class="tk-footer-cn">
+                     <a href="javascript:;" class="tk-footer" id="goBack">取消</a>
+                 </div>
+               </div>
+        </div>
+        <!--遮罩层-->
+      <!--   <div class="fullScreen"></div> -->
+    </div>
+ </section>
+
+
+  <!-- 加载中... -->
+  <div class="loading"><img src="/web/game/img/loading.png"></div>
+  <!-- 无数据 -->
+  <img src="/web/game/img/nodata.png" class="nodata" id="nodata">
+
+
+<script type="text/javascript" src="/web/game/js/jquery.min.js"></script>
+<script type="text/javascript" src="/web/game/js/tab.js"></script>
+<script type="text/javascript" src="/web/game/js/my.js"></script>
+</body>
+</html>

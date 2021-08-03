@@ -1,0 +1,125 @@
+{template '_header'}
+
+<div class="page-header">
+    当前位置：<span class="text-primary">游戏管理</span>
+</div>
+<div class="page-content">
+    <form action="" method="get">
+        <input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="ewei_shopv2" />
+        <input type="hidden" name="do" value="web" />
+        <input type="hidden" name="r" value="game" />
+        <div class="page-toolbar">
+            <div class="col-sm-6">
+                {ifp 'store.add'}
+                <a class='btn btn-primary btn-sm' href="{php echo webUrl('game/add')}"><i class='fa fa-plus'></i> 添加游戏</a>
+                {/if}
+            </div>
+            <div class="col-sm-6 pull-right">
+                <div class="input-group">
+                    
+                    <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="游戏标题">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"> 搜索</button>
+                    </span>
+
+                    </div>
+                </div>
+            </div>
+    </form>
+
+    {if count($list)>0}
+    
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th style='width:80px;'>序号</th>
+                <th style=''>游戏标题</th>
+                <th >抽奖资格</th>
+                <th style="width:;">人数上限</th>
+                <th style="width:100px;">最低开奖人数</th>
+                <th style="width:100px;">最低开奖金额</th>
+                <th>报名金额</th>
+                <th style="width:;">开始时间</th>
+                <th style="width:;">核销方式</th>
+                <!-- <th style="width:;">触发条件</th> -->
+                <th style="width:;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {loop $list $row}
+            <tr>
+                <td>{$row['id']}</td>
+                <td>{$row['game_name']}</td>
+                <td>{if $row['is_cash']==1}现金,{/if}{if $row['is_tong']==1}通用优惠券,{/if}{if $row['is_te']==1}特殊优惠券{/if}</td>
+                <td>{$row['member_max']}</td>
+                <td>{$row['member_min']}</td>
+                <td>{$row['money_min']}</td>
+                <td>{$row['game_money']}</td>
+                <td>{if $row['time_for']>0}每{$row['time_for']}分钟循环一次{else}{$row['start_time']}{/if}</td>
+                <td>
+                    <span class='label {if $row['hexiao']==1}label-success{else}label-primary{/if}' {ifp 'store.edit' } data-toggle='ajaxSwitch' data-switch-value='{$row[' hexiao']}' data-switch-value0='0|线上核销|label label-default|{php echo webUrl(' game/hexiao',array('hexiao'=>1,'id'=>$row['id']))}' data-switch-value1='1|线下核销|label label-success|{php echo webUrl(' game/hexiao',array('hexiao'=>0,'id'=>$row['id']))}' {/if}>
+                        {if $row['hexiao']==1}线下核销{else}线上核销{/if}</span>
+                </td>
+
+                <!-- <td>{if in_array(1,json_decode($row['ok_where']))}开始时间,{/if}{if in_array(2,json_decode($row['ok_where']))}最低开奖金额,{/if}{if in_array(3,json_decode($row['ok_where']))}最低开奖人数{/if}
+                </td> -->
+
+                <td>
+                    {if p('newstore')}
+                    <a class='btn btn-default  btn-sm btn-op btn-operation' href="{php echo webUrl('store/goods', array('id' => $row['id']))}">
+                        <span data-toggle="tooltip" data-placement="top" title="" data-original-title="商品">
+                            <i class='icow icow-goods'></i>
+                        </span>
+                    </a>
+                    {/if}
+                    {ifp 'store.edit|store.view'}
+                    <a class='btn btn-default btn-sm btn-op btn-operation' href="{php echo webUrl('game/edit', array('id' => $row['id']))}">
+                        <span data-toggle="tooltip" data-placement="top" title="" data-original-title="{ifp 'shop.verify.store.edit'}编辑{else}查看{/if}">
+                            {ifp 'shop.verify.store.edit'}
+                            <i class="icow icow-bianji2"></i>
+                            {else}
+                            <i class="icow icow-chakan-copy"></i>
+                            {/if}
+                        </span>
+                    </a>
+                    {/if}
+                    {if p('newstore')}
+                    {ifp 'store.diypage'}
+                    <a class="btn btn-default btn-sm btn-op btn-operation" href="{php echo webUrl('store/diypage/settings', array('id'=>$row['id']))}">
+                        <span data-toggle="tooltip" data-placement="top" title="" data-original-title="装修">
+                            <i class='icow icow-mendianzhuangxiu' style="font-weight: bolder"></i>
+                        </span>
+                    </a>
+                    {/if}
+                    {/if}
+                    <span class='label {if $row['status']==1}label-default{else}label-primary{/if}' {ifp 'store.edit' } data-toggle='ajaxSwitch' data-switch-value='{$row['status']}' data-switch-value0='0|开启|label label-primary|{php echo webUrl(' game/status',array('status'=>1,'id'=>$row['id']))}' data-switch-value1='1|关闭|label label-default|{php echo webUrl(' game/status',array('status'=>0,'id'=>$row['id']))}' {/if}>
+                        {if $row['status']==1}关闭{else}开启{/if}</span>
+
+                   <!--  <a class='btn btn-default  btn-sm btn-op btn-operation' data-toggle="ajaxRemove" href="{php echo webUrl('game/delete', array('id' => $row['id']))}" data-confirm="确认删除此门店吗？">
+                        <span data-toggle="tooltip" data-placement="top" title="" data-original-title="关闭">
+                            <i class='icow icow-shanchu1'></i>
+                        </span>
+                    </a> -->
+                    
+                </td>
+
+            </tr>
+            {/loop}
+        </tbody>
+        
+    </table>
+
+    </form>
+
+
+    {else}
+    <div class='panel panel-default'>
+        <div class='panel-body' style='text-align: center;padding:30px;'>
+            暂时没有任何门店!
+        </div>
+    </div>
+    {/if}
+</div>
+{template '_footer'}

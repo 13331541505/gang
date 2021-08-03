@@ -1,0 +1,216 @@
+2021-06-25 14:11:55 pid:29513 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:12:01 pid:29543 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:12:01 pid:29543 Workerman[server.php] already running
+2021-06-25 14:13:01 pid:29876 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:13:01 pid:29876 Workerman[server.php] already running
+2021-06-25 14:19:19 pid:31522 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:19:19 pid:31522 Workerman[server.php] already running
+2021-06-25 14:19:56 pid:31652 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:19:56 pid:31652 Workerman[server.php] already running
+2021-06-25 14:20:10 pid:31711 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:20:10 pid:31711 Workerman[server.php] already running
+2021-06-25 14:20:22 pid:31751 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:20:22 pid:31751 Workerman[server.php] already running
+2021-06-25 14:20:57 pid:31876 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:20:57 pid:31876 Workerman[server.php] already running
+2021-06-25 14:21:08 pid:31939 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:21:08 pid:31939 Workerman[server.php] already running
+2021-06-25 14:21:41 pid:32071 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:21:41 pid:32071 Workerman[server.php] already running
+2021-06-25 14:21:50 pid:32106 Workerman[server.php] stop 
+2021-06-25 14:21:50 pid:32106 Workerman[server.php] is stopping ...
+2021-06-25 14:21:50 pid:29515 Workerman[server.php] stopping ...
+2021-06-25 14:21:50 pid:29515 Workerman[server.php] has been stopped
+2021-06-25 14:21:50 pid:32106 Workerman[server.php] stop success
+2021-06-25 14:22:04 pid:32168 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:29:33 pid:1390 Workerman[server.php] stop 
+2021-06-25 14:29:33 pid:1390 Workerman[server.php] is stopping ...
+2021-06-25 14:29:33 pid:32170 Workerman[server.php] stopping ...
+2021-06-25 14:29:33 pid:32170 Workerman[server.php] has been stopped
+2021-06-25 14:29:33 pid:1390 Workerman[server.php] stop success
+2021-06-25 14:29:43 pid:1443 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:30:00 pid:1496 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:30:01 pid:1524 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:30:26 pid:1625 Workerman[server.php] stop 
+2021-06-25 14:30:26 pid:1625 Workerman[server.php] not run
+2021-06-25 14:30:39 pid:1698 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:31:01 pid:1773 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:31:01 pid:1773 Workerman[server.php] already running
+2021-06-25 14:32:01 pid:1995 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:32:01 pid:1995 Workerman[server.php] already running
+2021-06-25 14:33:01 pid:2244 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:33:01 pid:2244 Workerman[server.php] already running
+2021-06-25 14:34:01 pid:2464 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:34:01 pid:2464 Workerman[server.php] already running
+2021-06-25 14:35:01 pid:2674 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:35:01 pid:2674 Workerman[server.php] already running
+2021-06-25 14:36:01 pid:2899 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:36:01 pid:2899 Workerman[server.php] already running
+2021-06-25 14:37:01 pid:3114 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:37:01 pid:3114 Workerman[server.php] already running
+2021-06-25 14:38:01 pid:3472 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:38:01 pid:3472 Workerman[server.php] already running
+2021-06-25 14:39:01 pid:3690 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:39:01 pid:3690 Workerman[server.php] already running
+2021-06-25 14:39:59 pid:3926 Workerman[server.php] stop 
+2021-06-25 14:39:59 pid:3926 Workerman[server.php] is stopping ...
+2021-06-25 14:39:59 pid:1700 Workerman[server.php] stopping ...
+2021-06-25 14:39:59 pid:1700 Workerman[server.php] has been stopped
+2021-06-25 14:39:59 pid:3926 Workerman[server.php] stop success
+2021-06-25 14:40:01 pid:3952 Workerman[server.php] stop 
+2021-06-25 14:40:01 pid:3952 Workerman[server.php] not run
+2021-06-25 14:40:11 pid:4000 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:40:58 pid:4167 Workerman[server.php] stop 
+2021-06-25 14:40:58 pid:4167 Workerman[server.php] is stopping ...
+2021-06-25 14:40:58 pid:4002 Workerman[server.php] stopping ...
+2021-06-25 14:40:58 pid:4002 Workerman[server.php] has been stopped
+2021-06-25 14:40:58 pid:4167 Workerman[server.php] stop success
+2021-06-25 14:41:01 pid:4188 Workerman[server.php] stop 
+2021-06-25 14:41:01 pid:4188 Workerman[server.php] not run
+2021-06-25 14:41:07 pid:4222 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:42:01 pid:4409 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:42:01 pid:4409 Workerman[server.php] already running
+2021-06-25 14:42:35 pid:4541 Workerman[server.php] stop 
+2021-06-25 14:42:35 pid:4541 Workerman[server.php] is stopping ...
+2021-06-25 14:42:35 pid:4224 Workerman[server.php] stopping ...
+2021-06-25 14:42:35 pid:4224 Workerman[server.php] has been stopped
+2021-06-25 14:42:35 pid:4541 Workerman[server.php] stop success
+2021-06-25 14:42:50 pid:4602 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:43:01 pid:4653 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:43:05 pid:4677 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:43:05 pid:4677 Workerman[server.php] already running
+2021-06-25 14:43:16 pid:4726 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:43:16 pid:4726 Workerman[server.php] already running
+2021-06-25 14:44:01 pid:4900 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:44:01 pid:4900 Workerman[server.php] already running
+2021-06-25 14:45:01 pid:5112 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:45:01 pid:5112 Workerman[server.php] already running
+2021-06-25 14:46:01 pid:5334 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:46:01 pid:5334 Workerman[server.php] already running
+2021-06-25 14:47:01 pid:5553 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:47:01 pid:5553 Workerman[server.php] already running
+2021-06-25 14:48:01 pid:5781 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:48:01 pid:5781 Workerman[server.php] already running
+2021-06-25 14:49:01 pid:6006 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:49:01 pid:6006 Workerman[server.php] already running
+2021-06-25 14:50:01 pid:6245 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:50:01 pid:6245 Workerman[server.php] already running
+2021-06-25 14:51:01 pid:6449 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:51:01 pid:6449 Workerman[server.php] already running
+2021-06-25 14:52:01 pid:6675 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:52:01 pid:6675 Workerman[server.php] already running
+2021-06-25 14:53:01 pid:6895 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:53:01 pid:6895 Workerman[server.php] already running
+2021-06-25 14:53:51 pid:7099 Workerman[server.php] stop 
+2021-06-25 14:53:51 pid:7099 Workerman[server.php] is stopping ...
+2021-06-25 14:53:51 pid:4663 Workerman[server.php] stopping ...
+2021-06-25 14:53:51 pid:4663 Workerman[server.php] has been stopped
+2021-06-25 14:53:51 pid:7099 Workerman[server.php] stop success
+2021-06-25 14:53:59 pid:7135 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:54:01 pid:7154 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:54:01 pid:7154 Workerman[server.php] already running
+2021-06-25 14:55:01 pid:7371 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:55:01 pid:7371 Workerman[server.php] already running
+2021-06-25 14:55:48 pid:7551 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:55:48 pid:7551 Workerman[server.php] already running
+2021-06-25 14:55:53 pid:7569 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:55:53 pid:7569 Workerman[server.php] already running
+2021-06-25 14:56:01 pid:7603 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:56:01 pid:7603 Workerman[server.php] already running
+2021-06-25 14:56:05 pid:7630 Workerman[server.php] stop 
+2021-06-25 14:56:05 pid:7630 Workerman[server.php] is stopping ...
+2021-06-25 14:56:05 pid:7137 Workerman[server.php] stopping ...
+2021-06-25 14:56:05 pid:7137 Workerman[server.php] has been stopped
+2021-06-25 14:56:05 pid:7630 Workerman[server.php] stop success
+2021-06-25 14:56:14 pid:7673 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:57:01 pid:7841 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:57:48 pid:8020 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:58:01 pid:8068 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:59:01 pid:8288 Workerman[server.php] start in DAEMON mode
+2021-06-25 14:59:20 pid:8355 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:00:01 pid:8518 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:00:39 pid:8677 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:01:01 pid:8758 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:01:01 pid:8758 Workerman[server.php] already running
+2021-06-25 15:02:01 pid:8980 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:02:01 pid:8980 Workerman[server.php] already running
+2021-06-25 15:03:01 pid:9187 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:03:01 pid:9187 Workerman[server.php] already running
+2021-06-25 15:04:01 pid:9418 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:04:01 pid:9418 Workerman[server.php] already running
+2021-06-25 15:05:01 pid:9630 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:05:01 pid:9630 Workerman[server.php] already running
+2021-06-25 15:06:01 pid:9838 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:06:01 pid:9838 Workerman[server.php] already running
+2021-06-25 15:07:01 pid:10047 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:07:01 pid:10047 Workerman[server.php] already running
+2021-06-25 15:08:01 pid:10254 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:08:01 pid:10254 Workerman[server.php] already running
+2021-06-25 15:09:02 pid:10474 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:09:02 pid:10474 Workerman[server.php] already running
+2021-06-25 15:10:01 pid:10697 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:10:01 pid:10697 Workerman[server.php] already running
+2021-06-25 15:11:01 pid:10905 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:11:01 pid:10905 Workerman[server.php] already running
+2021-06-25 15:12:01 pid:11118 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:12:01 pid:11118 Workerman[server.php] already running
+2021-06-25 15:13:01 pid:11325 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:13:01 pid:11325 Workerman[server.php] already running
+2021-06-25 15:14:01 pid:11549 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:14:01 pid:11549 Workerman[server.php] already running
+2021-06-25 15:15:01 pid:11768 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:15:01 pid:11768 Workerman[server.php] already running
+2021-06-25 15:16:01 pid:11983 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:16:01 pid:11983 Workerman[server.php] already running
+2021-06-25 15:17:01 pid:12199 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:17:01 pid:12199 Workerman[server.php] already running
+2021-06-25 15:18:01 pid:12402 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:18:01 pid:12402 Workerman[server.php] already running
+2021-06-25 15:19:01 pid:12631 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:19:01 pid:12631 Workerman[server.php] already running
+2021-06-25 15:20:01 pid:12840 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:20:01 pid:12840 Workerman[server.php] already running
+2021-06-25 15:21:01 pid:13057 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:21:01 pid:13057 Workerman[server.php] already running
+2021-06-25 15:22:01 pid:13270 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:22:01 pid:13270 Workerman[server.php] already running
+2021-06-25 15:23:01 pid:13481 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:23:01 pid:13481 Workerman[server.php] already running
+2021-06-25 15:24:01 pid:13706 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:24:01 pid:13706 Workerman[server.php] already running
+2021-06-25 15:25:01 pid:13912 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:25:01 pid:13912 Workerman[server.php] already running
+2021-06-25 15:26:01 pid:14114 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:26:01 pid:14114 Workerman[server.php] already running
+2021-06-25 15:26:52 pid:14296 Workerman[server.php] stop 
+2021-06-25 15:26:52 pid:14296 Workerman[server.php] is stopping ...
+2021-06-25 15:26:52 pid:8679 Workerman[server.php] stopping ...
+2021-06-25 15:26:52 pid:8679 Workerman[server.php] has been stopped
+2021-06-25 15:26:52 pid:14296 Workerman[server.php] stop success
+2021-06-25 15:27:01 pid:14344 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:28:01 pid:14566 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:28:01 pid:14566 Workerman[server.php] already running
+2021-06-25 15:29:02 pid:14783 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:29:02 pid:14783 Workerman[server.php] already running
+2021-06-25 15:30:01 pid:14991 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:30:01 pid:14991 Workerman[server.php] already running
+2021-06-25 15:31:01 pid:15208 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:31:01 pid:15208 Workerman[server.php] already running
+2021-06-25 15:32:01 pid:15407 Workerman[server.php] start in DAEMON mode
+2021-06-25 15:32:01 pid:15407 Workerman[server.php] already running
+2021-06-25 16:17:47 pid:14354 Exception: You can't send(array) to client, you need to convert it to a string.  in /www/sunyu/gang/api/workman/vendor/walkor/workerman/Protocols/Websocket.php:236
+Stack trace:
+#0 /www/sunyu/gang/api/workman/vendor/walkor/workerman/Connection/TcpConnection.php(321): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 /www/sunyu/gang/api/workman/server.php(95): Workerman\Connection\TcpConnection->send(Array)
+#2 /www/sunyu/gang/api/workman/server.php(34): sendMessageByUid('4', Array)
+#3 /www/sunyu/gang/api/workman/vendor/walkor/workerman/Connection/TcpConnection.php(637): {closure}(Object(Workerman\Connection\TcpConnection), '{"uid":"4","per...')
+#4 /www/sunyu/gang/api/workman/vendor/walkor/workerman/Events/Select.php(293): Workerman\Connection\TcpConnection->baseRead(Resource id #89)
+#5 /www/sunyu/gang/api/workman/vendor/walkor/workerman/Worker.php(2430): Workerman\Events\Select->loop()
+#6 /www/sunyu/gang/api/workman/vendor/walkor/workerman/Worker.php(1554): Workerman\Worker->run()
+#7 /www/sunyu/gang/api/workman/vendor/walkor/workerman/Worker.php(1384): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#8 /www/sunyu/gang/api/workman/vendor/walkor/workerman/Worker.php(1358): Workerman\Worker::forkWorkersForLinux()
+#9 /www/sunyu/gang/api/workman/vendor/walkor/workerman/Worker.php(542): Workerman\Worker::forkWorkers()
+#10 /www/sunyu/gang/api/workman/server.php(102): Workerman\Worker::runAll()
+#11 {main}
+2021-06-25 16:17:47 pid:14354 Worker[14354] process terminated
+2021-06-25 16:17:47 pid:14351 worker[none:14354] exit with status 64000
